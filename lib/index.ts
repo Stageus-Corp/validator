@@ -10,6 +10,13 @@ export class Validate {
     this.data = originalData;
   }
 
+  public run() {
+    return {
+      data: this.data,
+      validation: this.validation,
+    };
+  }
+
   protected checkOptional(): boolean {
     if (this.optional && (this.data === undefined || this.data === null)) {
       return true;
@@ -126,6 +133,12 @@ class TypeValidate extends Validate {
   isBoolean() {
     if (this.checkOptional()) {
     }
+  }
+
+  isOptional() {
+    this.optional = true;
+
+    return this;
   }
 }
 
@@ -383,3 +396,46 @@ const validator = (data: any, defaultErrorMessage?: string) => {
 
   return validate;
 };
+
+console.log(validator(1).isNumber().isIn([1, 2, 3]).run());
+const req: { body: any } = {
+  body: {},
+};
+
+//
+
+const body = (fieldName: string, message?: string): ExpressValidate => {
+  const vlaidate = validator(12);
+  const expressValidate = new ExpressValidate('body', fieldName, vlaidate);
+
+  return expressValidate;
+};
+
+const validate = (validateList: ExpressValidate[]) => {
+  return (req: any, res: any, next: any) => {};
+};
+
+class ExpressValidate {
+  private contextList: { method: string; parameter: unknown[] }[] = [];
+
+  constructor(
+    public readonly funcName: 'body' | 'params' | 'query',
+    public readonly fieldName: string,
+    public typeValidate: TypeValidate
+  ) {}
+
+  isNumber() {
+    this.contextList.push({
+      method: 'isNumber',
+      parameter: [1, 2, 3],
+    });
+  }
+
+  run() {
+    for (const context of this.contextList) {
+      this.typeValidate[context.method](...context.parameter);
+    }
+  }
+}
+
+validate([body('name').isNumber()]);
