@@ -25,12 +25,8 @@ export class Validate {
   protected setValidationFalse(message: string): void {
     this.validation = false;
 
-    if (this.defaultErrorMessage) {
-      this.errorMessage = this.defaultErrorMessage;
-      return;
-    }
+    this.setErrorMessage(message);
 
-    this.errorMessage = message;
     return;
   }
 
