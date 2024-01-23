@@ -5,10 +5,7 @@ import { isIn } from '../../method/validate/number/isIn';
 import { Validate } from '../../types/Validate';
 
 export class NumberValidator extends Validator {
-  constructor(
-    message: null | string | Validate.Callback = null,
-    taskList: Task[] = []
-  ) {
+  constructor(message: null | string = null, taskList: Task[] = []) {
     super(message, taskList);
   }
 

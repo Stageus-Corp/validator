@@ -3,20 +3,10 @@ import { RunResult } from '../RunResult';
 import { Task } from '../Task';
 
 export class Validator {
-  protected callback: Validate.Callback | null = null;
-  protected message: string | null = null;
   constructor(
-    message: null | string | Validate.Callback = null,
+    protected message: null | string = null,
     protected taskList: Task[] = []
-  ) {
-    if (typeof message === 'string') {
-      this.message = message;
-      return;
-    }
-
-    this.callback = message;
-    this.message = null;
-  }
+  ) {}
 
   public run(originalData: any) {
     const taskList = this.taskList;

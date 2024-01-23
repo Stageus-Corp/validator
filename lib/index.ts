@@ -1,7 +1,6 @@
-import { TypeValidate } from './class/validate/TypeValidate';
+import { TypeValidator } from './class/validate/TypeValidator';
+import { Validate } from './types/Validate';
 
-const validate = new TypeValidate();
-
-const result = validate.isNumber().range({ min: 1 }).run(123);
-
-console.log(result);
+const validator = (message: string | null = null) => {
+  return new TypeValidator(message);
+};

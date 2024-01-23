@@ -6,10 +6,7 @@ import { NumberValidator } from './NumberValidator';
 import { Validator } from './Validator';
 
 export class TypeValidator extends Validator {
-  constructor(
-    message: null | string | Validate.Callback = null,
-    taskList: Task[] = []
-  ) {
+  constructor(message: null | string = null, taskList: Task[] = []) {
     super(message, taskList);
   }
 
