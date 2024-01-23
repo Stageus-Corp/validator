@@ -12,6 +12,7 @@ export class ArrayValidator extends Validator {
     option: { min?: number; max: number } | { min: number; max?: number }
   ) {
     this.taskList.push(new Task(length, option));
+
     return this;
   }
 
