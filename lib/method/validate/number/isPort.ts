@@ -5,7 +5,6 @@ import { range } from './range';
 
 export const isPort: ValidateMethod = (data: number) => {
   const intCondition = isInt(data);
-
   if (!intCondition.validState) {
     return new TaskResult(false, data, 'Value is not integer');
   }
