@@ -1,4 +1,5 @@
 import { isEmail } from '../../method/validate/string/isEmail';
+import { isHangeul } from '../../method/validate/string/isHangeul';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 
@@ -9,6 +10,19 @@ export class StringValidator extends Validator {
 
   isEmail() {
     this.taskList.push(new Task(isEmail));
+
+    return this;
+  }
+
+  /**
+   * A method of evaluating whether or not it is in hanguel
+   * @param option default value of complete is false, default value of space is false
+   */
+  isHanguel(option: {
+    complete?: boolean; // default false
+    space?: boolean; // default false
+  }) {
+    this.taskList.push(new Task(isHangeul, option));
 
     return this;
   }
