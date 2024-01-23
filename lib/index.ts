@@ -4,4 +4,15 @@ const validator = (message: string | null = null) => {
   return new TypeValidator(message);
 };
 
-const titleValidate = validator().isNumber().range({ min: 1 });
+const portValidator = validator()
+  .optional()
+  .isArray()
+  .isAllIf((element) => {
+    if (element < 0) {
+      return false;
+    }
+
+    return true;
+  });
+
+console.log(portValidator.run([1, 2, 3, -1]));

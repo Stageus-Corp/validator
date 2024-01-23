@@ -1,4 +1,5 @@
 import { isAllIf } from '../../method/validate/array/isAllIf';
+import { isAllNotNull } from '../../method/validate/array/isAllNotNull';
 import { length } from '../../method/validate/array/length';
 import { Task } from '../Task';
 import { Validator } from './Validator';
@@ -12,6 +13,12 @@ export class ArrayValidator extends Validator {
     option: { min?: number; max: number } | { min: number; max?: number }
   ) {
     this.taskList.push(new Task(length, option));
+
+    return this;
+  }
+
+  isAllNotNull() {
+    this.taskList.push(new Task(isAllNotNull));
 
     return this;
   }
