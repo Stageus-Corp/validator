@@ -1,23 +1,25 @@
 import { RunResult } from './class/RunResult';
-import { ValidateMethod } from './types/ValidateMethod';
+import { Task } from './class/Task';
 
 export class Validate {
-  protected readonly originalData: any;
-  protected optionalState: boolean = false;
-  protected validState = true;
-  protected message: string | null = null;
-  protected taskList: ValidateMethod[] = [];
-
-  constructor(protected data: any, message?: string) {
-    this.originalData = data;
-    this.message = message || null;
+  constructor(
+    protected data: any = null,
+    protected message: null | string = null,
+    protected optionalState: boolean = false,
+    protected validState: boolean = true,
+    protected taskList: Task[] = [],
+    protected originalData: null | any = null
+  ) {
+    if (!this.originalData) {
+      this.originalData = data;
+    }
   }
 
   public run(data: any) {
     this.data = data;
 
     for (const task of this.taskList) {
-      const result = task(this.data);
+      const result = task.method(this.data, ...task.argument);
 
       if (this.optionalState && (data === undefined || data === null)) {
         return new RunResult(this.data, true, null);
@@ -31,24 +33,6 @@ export class Validate {
       break;
     }
 
-    return {
-      data: this.data,
-      message: this.message,
-      valid: this.validState,
-    };
-  }
-
-  protected setup<T>(
-    data: T,
-    valid: boolean,
-    message: string | null,
-    taskList: ValidateMethod[]
-  ) {
-    this.data = data;
-    this.validState = valid;
-    this.message = message || null;
-    this.taskList = taskList;
+    return new RunResult(this.data, this.validState, this.message);
   }
 }
-
-const validate = new Validate('asdf');

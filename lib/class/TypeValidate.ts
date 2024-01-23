@@ -1,31 +1,61 @@
 import { Validate } from '..';
 import { isNumber } from '../method/isNumber';
-import { ValidateMethod } from '../types/ValidateMethod';
+import { range } from '../method/number/range';
+import { Task } from './Task';
 import { TaskResult } from './TaskResult';
 
 export class TypeValidate extends Validate {
-  protected readonly originalData: any;
-  protected optionalState: boolean = false;
-  protected validState = true;
-  protected message: string | null = null;
-  protected taskList: ValidateMethod[] = [];
-
-  constructor(protected data: any, message?: string) {
-    super(data, message);
+  constructor(
+    protected data: any = null,
+    protected message: null | string = null,
+    protected optionalState: boolean = false,
+    protected validState: boolean = true,
+    protected taskList: Task[] = [],
+    protected originalData: null | any = null
+  ) {
+    super(data, message, optionalState, validState, taskList, originalData);
   }
 
   public optional() {
-    this.taskList.push((data) => {
-      this.optionalState = true;
+    this.taskList.push(
+      new Task((data) => {
+        this.optionalState = true;
 
-      return new TaskResult(true);
-    });
+        return new TaskResult(true);
+      })
+    );
 
     return this;
   }
 
   isNumber() {
-    this.taskList.push(isNumber);
+    this.taskList.push(new Task(isNumber));
+
+    return new NumberValidate(
+      this.data,
+      this.message,
+      this.optionalState,
+      this.validState,
+      this.taskList,
+      this.originalData
+    );
+  }
+}
+
+export class NumberValidate extends Validate {
+  constructor(
+    protected data: number,
+    protected message: null | string = null,
+    protected optionalState: boolean = false,
+    protected validState: boolean = true,
+    protected taskList: Task[] = [],
+    protected originalData: null | any = null
+  ) {
+    super(data, message, optionalState, validState, taskList, originalData);
+  }
+
+  range(option: { min?: number; max: number } | { min: number; max?: number }) {
+    this.taskList.push(new Task(range, option));
 
     return this;
   }
