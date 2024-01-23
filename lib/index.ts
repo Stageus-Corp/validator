@@ -4,15 +4,9 @@ const validator = (message: string | null = null) => {
   return new TypeValidator(message);
 };
 
-const portValidator = validator()
+const validate = validator()
   .optional()
-  .isArray()
-  .isAllIf((element) => {
-    if (element < 0) {
-      return false;
-    }
+  .isString()
+  .match(/^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
 
-    return true;
-  });
-
-console.log(portValidator.run([1, 2, 3, -1]));
+console.log(validate.run('joch2712@naver.com'));

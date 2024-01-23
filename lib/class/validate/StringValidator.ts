@@ -1,5 +1,6 @@
 import { isEmail } from '../../method/validate/string/isEmail';
 import { isHangeul } from '../../method/validate/string/isHangeul';
+import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
 import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
 import { Task } from '../Task';
@@ -39,6 +40,12 @@ export class StringValidator extends Validator {
 
   match(regExp: RegExp) {
     this.taskList.push(new Task(match, regExp));
+
+    return this;
+  }
+
+  isOnlyAlphabet() {
+    this.taskList.push(new Task(isOnlyAlphabet));
 
     return this;
   }
