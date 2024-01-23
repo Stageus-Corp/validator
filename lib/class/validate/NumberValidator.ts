@@ -2,7 +2,6 @@ import { range } from '../../method/validate/number/range';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 import { isIn } from '../../method/validate/number/isIn';
-import { Validate } from '../../types/Validate';
 
 export class NumberValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {

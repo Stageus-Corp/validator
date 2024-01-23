@@ -1,5 +1,4 @@
 import { isNumber } from '../../method/validate/isNumber';
-import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
 import { NumberValidator } from './NumberValidator';

@@ -1,4 +1,3 @@
-import { Validate } from '../../types/Validate';
 import { RunResult } from '../RunResult';
 import { Task } from '../Task';
 
