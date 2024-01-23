@@ -1,12 +1,13 @@
 import { range } from '../../method/validate/number/range';
 import { Task } from '../Task';
-import { Validate } from './Validate';
+import { Validator } from './Validator';
 import { isIn } from '../../method/validate/number/isIn';
+import { Validate } from '../../types/Validate';
 
-export class NumberValidate extends Validate {
+export class NumberValidator extends Validator {
   constructor(
-    protected message: null | string = null,
-    protected taskList: Task[] = []
+    message: null | string | Validate.Callback = null,
+    taskList: Task[] = []
   ) {
     super(message, taskList);
   }

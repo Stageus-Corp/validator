@@ -1,13 +1,14 @@
 import { isNumber } from '../../method/validate/isNumber';
+import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
-import { NumberValidate } from './NumberValidate';
-import { Validate } from './Validate';
+import { NumberValidator } from './NumberValidator';
+import { Validator } from './Validator';
 
-export class TypeValidate extends Validate {
+export class TypeValidator extends Validator {
   constructor(
-    protected message: null | string = null,
-    protected taskList: Task[] = []
+    message: null | string | Validate.Callback = null,
+    taskList: Task[] = []
   ) {
     super(message, taskList);
   }
@@ -29,6 +30,6 @@ export class TypeValidate extends Validate {
   public isNumber() {
     this.taskList.push(new Task(isNumber));
 
-    return new NumberValidate(this.message, this.taskList);
+    return new NumberValidator(this.message, this.taskList);
   }
 }
