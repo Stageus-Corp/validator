@@ -1,6 +1,5 @@
 import { RunResult } from '../RunResult';
 import { Task } from '../Task';
-import { TaskResult } from '../TaskResult';
 
 export class Validate {
   constructor(
@@ -24,9 +23,9 @@ export class Validate {
       // force exit
       if (result.forceExit) {
         return new RunResult(
-          data,
           result.validState,
           this.message,
+          data,
           originalData
         );
       }
@@ -37,9 +36,9 @@ export class Validate {
       }
 
       // Fail
-      return new RunResult(data, false, this.message, originalData);
+      return new RunResult(false, this.message, data, originalData);
     }
 
-    return new RunResult(data, true, null, originalData);
+    return new RunResult(true, null, data, originalData);
   }
 }
