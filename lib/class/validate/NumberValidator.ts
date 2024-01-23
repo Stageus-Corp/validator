@@ -3,6 +3,7 @@ import { Task } from '../Task';
 import { Validator } from './Validator';
 import { isIn } from '../../method/validate/number/isIn';
 import { isNotIn } from '../../method/validate/number/isNotIn';
+import { isInt } from '../../method/validate/number/isInt';
 
 export class NumberValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -23,6 +24,12 @@ export class NumberValidator extends Validator {
 
   isNotIn(numberList: number[]) {
     this.taskList.push(new Task(isNotIn, numberList));
+
+    return this;
+  }
+
+  isInt() {
+    this.taskList.push(new Task(isInt));
 
     return this;
   }
