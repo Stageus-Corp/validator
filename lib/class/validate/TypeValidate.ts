@@ -1,44 +1,34 @@
-import { Validate } from '../..';
 import { isNumber } from '../../method/isNumber';
-import { range } from '../../method/number/range';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
 import { NumberValidate } from './NumberValidate';
+import { Validate } from './Validate';
 
 export class TypeValidate extends Validate {
   constructor(
-    protected data: any = null,
     protected message: null | string = null,
-    protected optionalState: boolean = false,
-    protected validState: boolean = true,
-    protected taskList: Task[] = [],
-    protected originalData: null | any = null
+    protected taskList: Task[] = []
   ) {
-    super(data, message, optionalState, validState, taskList, originalData);
+    super(message, taskList);
   }
 
   public optional() {
     this.taskList.push(
       new Task((data) => {
-        this.optionalState = true;
+        if (data === undefined || data === null) {
+          return new TaskResult(true, data, null, true);
+        }
 
-        return new TaskResult(true);
+        return new TaskResult(true, data, null);
       })
     );
 
     return this;
   }
 
-  isNumber() {
+  public isNumber() {
     this.taskList.push(new Task(isNumber));
 
-    return new NumberValidate(
-      this.data,
-      this.message,
-      this.optionalState,
-      this.validState,
-      this.taskList,
-      this.originalData
-    );
+    return new NumberValidate(this.message, this.taskList);
   }
 }

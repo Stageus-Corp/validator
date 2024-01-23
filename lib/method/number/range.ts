@@ -9,8 +9,12 @@ export const range: ValidateMethod = (
   const max = option.max || +Infinity;
 
   if (data < min || data > max) {
-    return new TaskResult(false, `Value is out of range ( ${min} ~ ${max} )`);
+    return new TaskResult(
+      false,
+      data,
+      `Value is out of range ( ${min} ~ ${max} )`
+    );
   }
 
-  return new TaskResult(true);
+  return new TaskResult(true, data);
 };
