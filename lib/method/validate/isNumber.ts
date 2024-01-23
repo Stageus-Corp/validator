@@ -1,5 +1,5 @@
-import { ValidateMethod } from '../types/ValidateMethod';
-import { TaskResult } from '../class/TaskResult';
+import { ValidateMethod } from '../../types/ValidateMethod';
+import { TaskResult } from '../../class/TaskResult';
 
 export const isNumber: ValidateMethod = (data) => {
   const condition = typeof data === 'number' && !isNaN(data);

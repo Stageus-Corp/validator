@@ -1,4 +1,4 @@
-import { range } from '../../method/number/range';
+import { range } from '../../method/validate/number/range';
 import { Task } from '../Task';
 import { Validate } from './Validate';
 

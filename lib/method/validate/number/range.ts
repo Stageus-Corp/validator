@@ -1,5 +1,5 @@
-import { TaskResult } from '../../class/TaskResult';
-import { ValidateMethod } from '../../types/ValidateMethod';
+import { TaskResult } from '../../../class/TaskResult';
+import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const range: ValidateMethod = (
   data: number,

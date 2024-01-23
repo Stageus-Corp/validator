@@ -1,4 +1,4 @@
-import { isNumber } from '../../method/isNumber';
+import { isNumber } from '../../method/validate/isNumber';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
 import { NumberValidate } from './NumberValidate';
