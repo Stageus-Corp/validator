@@ -1,5 +1,3 @@
-export type ValidateMethod = (
-  data: any,
-  optional: boolean,
-  valid: boolean
-) => { valid: boolean; message: null | string } | true;
+import { TaskResult } from '../class/TaskResult';
+
+export type ValidateMethod<T = any> = (data: T) => TaskResult;
