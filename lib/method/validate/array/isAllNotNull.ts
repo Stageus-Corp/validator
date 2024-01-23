@@ -7,7 +7,7 @@ export const isAllNotNull: ValidateMethod = (data: any[]) => {
 
     const condition = element !== null && element !== undefined;
     if (!condition) {
-      return new TaskResult(false, data, `Value(Array[${element}]) is null`);
+      return new TaskResult(false, data, `Value(Array[${i}]) is null`);
     }
   }
 
