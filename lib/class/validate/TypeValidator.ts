@@ -1,9 +1,11 @@
 import { isArray } from '../../method/validate/isArray';
 import { isNumber } from '../../method/validate/isNumber';
+import { isString } from '../../method/validate/isString';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
 import { ArrayValidator } from './ArrayValidator';
 import { NumberValidator } from './NumberValidator';
+import { StringValidator } from './StringValidator';
 import { Validator } from './Validator';
 
 export class TypeValidator extends Validator {
@@ -35,5 +37,11 @@ export class TypeValidator extends Validator {
     this.taskList.push(new Task(isArray));
 
     return new ArrayValidator(this.message, this.taskList);
+  }
+
+  public isString() {
+    this.taskList.push(new Task(isString));
+
+    return new StringValidator(this.message, this.taskList);
   }
 }
