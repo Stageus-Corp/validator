@@ -40,6 +40,6 @@ export class Validate {
       return new RunResult(data, false, this.message, originalData);
     }
 
-    return new RunResult(data, true, this.message, originalData);
+    return new RunResult(data, true, null, originalData);
   }
 }
