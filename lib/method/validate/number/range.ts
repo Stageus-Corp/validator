@@ -5,8 +5,8 @@ export const range: ValidateMethod = (
   data: number,
   option: { min?: number; max: number } | { min: number; max?: number }
 ) => {
-  const min = option.min || -Infinity;
-  const max = option.max || +Infinity;
+  const min = option.min === undefined ? -Infinity : option.min;
+  const max = option.max === undefined ? +Infinity : option.max;
 
   if (data < min || data > max) {
     return new TaskResult(
