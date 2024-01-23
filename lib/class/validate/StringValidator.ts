@@ -1,6 +1,7 @@
 import { isEmail } from '../../method/validate/string/isEmail';
 import { isHangeul } from '../../method/validate/string/isHangeul';
 import { length } from '../../method/validate/string/length';
+import { match } from '../../method/validate/string/match';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 
@@ -32,6 +33,12 @@ export class StringValidator extends Validator {
     option: { min?: number; max: number } | { min: number; max?: number }
   ) {
     this.taskList.push(new Task(length, option));
+
+    return this;
+  }
+
+  match(regExp: RegExp) {
+    this.taskList.push(new Task(match, regExp));
 
     return this;
   }
