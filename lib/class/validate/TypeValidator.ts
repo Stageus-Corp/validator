@@ -1,5 +1,6 @@
 import { setDefault } from '../../method/validate/default';
 import { isArray } from '../../method/validate/isArray';
+import { isEmpty } from '../../method/validate/isEmpty';
 import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
 import { optional } from '../../method/validate/optional';
@@ -57,5 +58,14 @@ export class TypeValidator extends Validator {
     this.taskList.push(new Task(isString));
 
     return new StringValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to determin if the value is null or undefined
+   */
+  public isEmpty() {
+    this.taskList.push(new Task(isEmpty));
+
+    return new Validator(this.message, this.taskList);
   }
 }
