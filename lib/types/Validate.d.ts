@@ -19,10 +19,10 @@ export namespace Validate {
   export namespace String {
     export interface IsStringOption {
       /**
-       * Strict about the type of value input
+       * Whether to convert to String type by allowing a number as well
        * @default false
        */
-      strict?: boolean;
+      allowNumber?: boolean;
     }
 
     export type LengthOption =

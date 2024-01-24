@@ -57,8 +57,8 @@ export class TypeValidator extends Validator {
   /**
    * Method to determine if the value is of a string type
    */
-  public isString() {
-    this.taskList.push(new Task(isString));
+  public isString(option?: Validate.String.IsStringOption) {
+    this.taskList.push(new Task(isString, option));
 
     return new StringValidator(this.message, this.taskList);
   }
