@@ -2,6 +2,7 @@ import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
 import { isEmail } from '../../method/validate/string/isEmail';
 import { isHangeul } from '../../method/validate/string/isHangeul';
+import { isJwt } from '../../method/validate/string/isJwt';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
 import { isPw } from '../../method/validate/string/isPw';
 import { length } from '../../method/validate/string/length';
@@ -40,7 +41,7 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method of verifying that the entered value satisfies a regular expression
+   * Method of verifying that value satisfies a regular expression
    */
   match(regExp: RegExp) {
     this.taskList.push(new Task(match, regExp));
@@ -49,7 +50,7 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method to verify that it contains only alphabets
+   * Method to verify that value contains only alphabets
    */
   isOnlyAlphabet() {
     this.taskList.push(new Task(isOnlyAlphabet));
@@ -58,7 +59,7 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method to determine if it is in date format
+   * Method to determine if value is in date format
    */
   isDate() {
     this.taskList.push(new Task(isDate));
@@ -67,7 +68,7 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method to determine if it is in date format containing time
+   * Method to determine if value is in date format containing time
    */
   isDateTime() {
     this.taskList.push(new Task(isDateTime));
@@ -76,10 +77,19 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method of verifying that it is in password format
+   * Method of verifying that value is in password format
    */
   isPw(option?: Validate.String.IsPwOption) {
     this.taskList.push(new Task(isPw, option));
+
+    return this;
+  }
+
+  /**
+   * Method to determine if value is jwt
+   */
+  isJwt() {
+    this.taskList.push(new Task(isJwt));
 
     return this;
   }
