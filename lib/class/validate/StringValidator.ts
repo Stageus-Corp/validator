@@ -6,6 +6,7 @@ import { isHangeul } from '../../method/validate/string/isHangeul';
 import { isJwt } from '../../method/validate/string/isJwt';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
 import { isPw } from '../../method/validate/string/isPw';
+import { isStartWith } from '../../method/validate/string/isStartWith';
 import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
 import { Validate } from '../../types/Validate';
@@ -96,10 +97,19 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method to determine if it is a string ending with value
+   * Method to determine if value is a string ending with input string
    */
   isEndWith(endStr: string) {
     this.taskList.push(new Task(isEndWith, endStr));
+
+    return this;
+  }
+
+  /**
+   * Method to determine if value is a string starting with input string
+   */
+  isStartWith(startStr: string) {
+    this.taskList.push(new Task(isStartWith, startStr));
 
     return this;
   }
