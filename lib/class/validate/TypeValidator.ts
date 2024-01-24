@@ -13,6 +13,9 @@ export class TypeValidator extends Validator {
     super(message, taskList);
   }
 
+  /**
+   * Method to allow entered values to be null or undeﬁned
+   */
   public optional() {
     this.taskList.push(
       new Task((data) => {
@@ -27,18 +30,27 @@ export class TypeValidator extends Validator {
     return this;
   }
 
+  /**
+   * Method to determine if the value is of a numeric type
+   */
   public isNumber() {
     this.taskList.push(new Task(isNumber));
 
     return new NumberValidator(this.message, this.taskList);
   }
 
+  /**
+   * Method to determine if the value is of a array type
+   */
   public isArray() {
     this.taskList.push(new Task(isArray));
 
     return new ArrayValidator(this.message, this.taskList);
   }
 
+  /**
+   * Method to determine if the value is of a string type
+   */
   public isString() {
     this.taskList.push(new Task(isString));
 
