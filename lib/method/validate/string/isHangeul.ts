@@ -3,7 +3,7 @@ import { Validate } from '../../../types/Validate';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const isHangeul: ValidateMethod<string> = (
-  data,
+  value,
   option: Validate.String.IsHanguelOption
 ) => {
   const hanguelRegExp = new RegExp(
@@ -12,14 +12,14 @@ export const isHangeul: ValidateMethod<string> = (
       : `^[ㄱ-ㅎㅏ-ㅣ가-힣${option.space ? '\\s' : ''}]*$`
   );
 
-  const hangeulCondition = hanguelRegExp.test(data);
+  const hangeulCondition = hanguelRegExp.test(value);
   if (!hangeulCondition) {
     return new TaskResult(
       false,
-      data,
+      value,
       `Value is not ${option.complete ? 'complete' : ''} hanguel`
     );
   }
 
-  return new TaskResult(true, data);
+  return new TaskResult(true, value);
 };

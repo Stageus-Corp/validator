@@ -3,16 +3,16 @@ import { ValidateMethod } from '../../../types/ValidateMethod';
 import { isInt } from './isInt';
 import { range } from './range';
 
-export const isPort: ValidateMethod<number> = (data) => {
-  const intCondition = isInt(data);
+export const isPort: ValidateMethod<number> = (value) => {
+  const intCondition = isInt(value);
   if (!intCondition.validState) {
-    return new TaskResult(false, data, 'Value is not integer');
+    return new TaskResult(false, value, 'Value is not integer');
   }
 
-  const portCondition = range(data, { min: 0, max: 65535 });
+  const portCondition = range(value, { min: 0, max: 65535 });
   if (!portCondition.validState) {
-    return new TaskResult(false, data, 'Value cannot be port number');
+    return new TaskResult(false, value, 'Value cannot be port number');
   }
 
-  return new TaskResult(true, data);
+  return new TaskResult(true, value);
 };
