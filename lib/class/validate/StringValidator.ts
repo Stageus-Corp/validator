@@ -66,7 +66,7 @@ export class StringValidator extends Validator {
     return this;
   }
 
-  isPw(option?: Validate.IsPwOption) {
+  isPw(option?: Validate.String.IsPwOption) {
     this.taskList.push(new Task(isPw, option));
 
     return this;

@@ -4,7 +4,7 @@ import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const isPw: ValidateMethod = (
   data: string,
-  option: Validate.IsPwOption
+  option: Validate.String.IsPwOption
 ) => {
   const spaceRegExp = /\s/;
   const spaceCondition = spaceRegExp.test(data);
