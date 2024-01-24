@@ -1,5 +1,5 @@
-import { toInt } from '../../method/transform/toInt';
-import { toNumber } from '../../method/transform/toNumber';
+import { toInt } from '../../method/transform/string/toInt';
+import { toNumber } from '../../method/transform/string/toNumber';
 import { include } from '../../method/validate/string/include';
 import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
