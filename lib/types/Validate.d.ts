@@ -6,7 +6,25 @@ export namespace Validate {
     original?: any
   ) => any;
 
+  export namespace Number {
+    export interface IsNumberOption {
+      /**
+       * Strict about the type of value input
+       * @default false
+       */
+      strict?: boolean;
+    }
+  }
+
   export namespace String {
+    export interface IsStringOption {
+      /**
+       * Strict about the type of value input
+       * @default false
+       */
+      strict?: boolean;
+    }
+
     export type LengthOption =
       | {
           /**
@@ -69,6 +87,14 @@ export namespace Validate {
   }
 
   export namespace Array {
+    export interface IsArrayOption {
+      /**
+       * Strict about the type of value input
+       * @default false
+       */
+      strict?: boolean;
+    }
+
     export type LengthOption =
       | {
           /**
