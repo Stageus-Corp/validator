@@ -1,9 +1,10 @@
 import { TaskResult } from '../../../class/TaskResult';
+import { Validate } from '../../../types/Validate';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const length: ValidateMethod = (
   data: string,
-  option: { min?: number; max: number } | { min: number; max?: number }
+  option: Validate.String.LengthOption
 ) => {
   const min = option.min === undefined ? -Infinity : option.min;
   const max = option.max === undefined ? +Infinity : option.max;

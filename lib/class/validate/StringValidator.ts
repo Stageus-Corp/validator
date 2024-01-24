@@ -31,9 +31,7 @@ export class StringValidator extends Validator {
     return this;
   }
 
-  length(
-    option: { min?: number; max: number } | { min: number; max?: number }
-  ) {
+  length(option: Validate.String.LengthOption) {
     this.taskList.push(new Task(length, option));
 
     return this;
