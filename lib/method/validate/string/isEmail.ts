@@ -1,7 +1,7 @@
 import { TaskResult } from '../../../class/TaskResult';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
-export const isEmail: ValidateMethod = (data: string) => {
+export const isEmail: ValidateMethod<string> = (data) => {
   const emailRegExp = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
   const condition = emailRegExp.test(data);

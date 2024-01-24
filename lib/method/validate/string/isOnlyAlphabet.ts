@@ -1,7 +1,7 @@
 import { TaskResult } from '../../../class/TaskResult';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
-export const isOnlyAlphabet: ValidateMethod = (data: string) => {
+export const isOnlyAlphabet: ValidateMethod<string> = (data) => {
   const regExp = /^[a-zA-Z]+$/;
 
   const condition = regExp.test(data);

@@ -1,8 +1,8 @@
 import { TaskResult } from '../../../class/TaskResult';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
-export const isAllIf: ValidateMethod = (
-  data: any[],
+export const isAllIf: ValidateMethod<any[]> = (
+  data,
   func: (element: any) => boolean
 ) => {
   for (const i in data) {

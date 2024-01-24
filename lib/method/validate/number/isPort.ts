@@ -3,7 +3,7 @@ import { ValidateMethod } from '../../../types/ValidateMethod';
 import { isInt } from './isInt';
 import { range } from './range';
 
-export const isPort: ValidateMethod = (data: number) => {
+export const isPort: ValidateMethod<number> = (data) => {
   const intCondition = isInt(data);
   if (!intCondition.validState) {
     return new TaskResult(false, data, 'Value is not integer');

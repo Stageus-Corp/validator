@@ -2,8 +2,8 @@ import { TaskResult } from '../../../class/TaskResult';
 import { Validate } from '../../../types/Validate';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
-export const length: ValidateMethod = (
-  data: any[],
+export const length: ValidateMethod<any[]> = (
+  data,
   option: Validate.Array.LengthOption
 ) => {
   const min = option.min === undefined ? -Infinity : option.min;

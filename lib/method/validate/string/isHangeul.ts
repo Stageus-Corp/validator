@@ -2,8 +2,8 @@ import { TaskResult } from '../../../class/TaskResult';
 import { Validate } from '../../../types/Validate';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
-export const isHangeul: ValidateMethod = (
-  data: string,
+export const isHangeul: ValidateMethod<string> = (
+  data,
   option: Validate.String.IsHanguelOption
 ) => {
   const hanguelRegExp = new RegExp(
