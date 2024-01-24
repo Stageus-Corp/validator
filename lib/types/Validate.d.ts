@@ -6,6 +6,20 @@ export namespace Validate {
   ) => void;
 
   export namespace String {
+    export interface isHanguelOption {
+      /**
+       * Determines whether Value is a complete hanguel
+       * @default false
+       */
+      complete?: boolean;
+
+      /**
+       * Determines whether Value should include a space.
+       * @default false
+       */
+      space?: boolean;
+    }
+
     export interface IsPwOption {
       /**
        * Determines whether the password should include a number.

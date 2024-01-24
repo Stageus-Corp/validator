@@ -1,12 +1,10 @@
 import { TaskResult } from '../../../class/TaskResult';
+import { Validate } from '../../../types/Validate';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const isHangeul: ValidateMethod = (
   data: string,
-  option: {
-    complete?: boolean; // default false
-    space?: boolean; // default false
-  }
+  option: Validate.String.isHanguelOption
 ) => {
   const hanguelRegExp = new RegExp(
     option.complete
