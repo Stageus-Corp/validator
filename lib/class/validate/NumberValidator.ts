@@ -11,30 +11,45 @@ export class NumberValidator extends Validator {
     super(message, taskList);
   }
 
+  /**
+   * Method for examining numeric ranges
+   */
   range(option: { min?: number; max: number } | { min: number; max?: number }) {
     this.taskList.push(new Task(range, option));
 
     return this;
   }
 
+  /**
+   * Method of checking for specific values
+   */
   isIn(numberList: number[]) {
     this.taskList.push(new Task(isIn, numberList));
 
     return this;
   }
 
+  /**
+   * Method of checking that there are no specific values
+   */
   isNotIn(numberList: number[]) {
     this.taskList.push(new Task(isNotIn, numberList));
 
     return this;
   }
 
+  /**
+   * Method to determine if it is an integer
+   */
   isInt() {
     this.taskList.push(new Task(isInt));
 
     return this;
   }
 
+  /**
+   * Method to determine if a number is available as a port
+   */
   isPort() {
     this.taskList.push(new Task(isPort));
 
