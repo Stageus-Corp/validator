@@ -39,8 +39,8 @@ export class TypeValidator extends Validator {
   /**
    * Method to determine if the value is of a numeric type
    */
-  public isNumber() {
-    this.taskList.push(new Task(isNumber));
+  public isNumber(option?: Validate.Number.IsNumberOption) {
+    this.taskList.push(new Task(isNumber, option));
 
     return new NumberValidator(this.message, this.taskList);
   }
