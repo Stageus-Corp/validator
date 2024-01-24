@@ -1,3 +1,4 @@
+import { split } from '../../method/transform/string/split';
 import { toInt } from '../../method/transform/string/toInt';
 import { toNumber } from '../../method/transform/string/toNumber';
 import { include } from '../../method/validate/string/include';
@@ -14,7 +15,9 @@ import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
 import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
+import { ArrayValidator } from './ArrayValidator';
 import { NumberValidator } from './NumberValidator';
+import { StringArrayValidator } from './StringArrayValidator';
 import { Validator } from './Validator';
 
 export class StringValidator extends Validator {
@@ -143,5 +146,14 @@ export class StringValidator extends Validator {
     this.taskList.push(new Task(toInt));
 
     return new NumberValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to split value as an array
+   */
+  split(flag: string) {
+    this.taskList.push(new Task(split, flag));
+
+    return new StringArrayValidator(this.message, this.taskList);
   }
 }
