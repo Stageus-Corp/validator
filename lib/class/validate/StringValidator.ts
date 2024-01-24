@@ -1,6 +1,7 @@
 import { lTrim } from '../../method/transform/string/lTrim';
 import { rTrim } from '../../method/transform/string/rTrim';
 import { split } from '../../method/transform/string/split';
+import { toBoolean } from '../../method/transform/string/toBoolean';
 import { toInt } from '../../method/transform/string/toInt';
 import { toNumber } from '../../method/transform/string/toNumber';
 import { trim } from '../../method/transform/string/trim';
@@ -19,6 +20,7 @@ import { match } from '../../method/validate/string/match';
 import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { ArrayValidator } from './ArrayValidator';
+import { BooleanValidator } from './BooleanValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringArrayValidator } from './StringArrayValidator';
 import { Validator } from './Validator';
@@ -149,6 +151,15 @@ export class StringValidator extends Validator {
     this.taskList.push(new Task(toInt));
 
     return new NumberValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to transform value to a boolean
+   */
+  toBoolean() {
+    this.taskList.push(new Task(toBoolean));
+
+    return new BooleanValidator(this.message, this.taskList);
   }
 
   /**
