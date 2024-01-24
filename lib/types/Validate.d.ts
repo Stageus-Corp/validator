@@ -66,4 +66,32 @@ export namespace Validate {
       strong?: boolean;
     }
   }
+
+  export namespace Array {
+    export type LengthOption =
+      | {
+          /**
+           * The value determines the minimum limit for the arrary length check
+           * @default -Infinity
+           */
+          min?: number;
+
+          /**
+           * The value sets the maximum limit for the arrary length check
+           */
+          max: number;
+        }
+      | {
+          /**
+           * The value determines the minimum limit for the arrary length check
+           */
+          min: number;
+
+          /**
+           * The value sets the maximum limit for the arrary length check
+           * @default Infinity
+           */
+          max?: number;
+        };
+  }
 }

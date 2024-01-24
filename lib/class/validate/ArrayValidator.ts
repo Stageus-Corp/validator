@@ -1,6 +1,7 @@
 import { isAllIf } from '../../method/validate/array/isAllIf';
 import { isAllNotNull } from '../../method/validate/array/isAllNotNull';
 import { length } from '../../method/validate/array/length';
+import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 
@@ -9,9 +10,7 @@ export class ArrayValidator extends Validator {
     super(message, taskList);
   }
 
-  legnth(
-    option: { min?: number; max: number } | { min: number; max?: number }
-  ) {
+  legnth(option: Validate.Array.LengthOption) {
     this.taskList.push(new Task(length, option));
 
     return this;
