@@ -4,9 +4,9 @@ import { ValidateMethod } from '../../types/ValidateMethod';
 
 export const isBoolean: ValidateMethod<any> = (
   value,
-  option: Validate.Boolean.IsBooleanOption
+  option?: Validate.Boolean.IsBooleanOption
 ) => {
-  const strict = option.strict || false;
+  const strict = option?.strict || false;
 
   if (!strict && typeof value === 'string') {
     if (value === 'true') {
