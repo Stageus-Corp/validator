@@ -1,6 +1,7 @@
 import { split } from '../../method/transform/string/split';
 import { toInt } from '../../method/transform/string/toInt';
 import { toNumber } from '../../method/transform/string/toNumber';
+import { trim } from '../../method/transform/string/trim';
 import { include } from '../../method/validate/string/include';
 import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
@@ -155,5 +156,11 @@ export class StringValidator extends Validator {
     this.taskList.push(new Task(split, flag));
 
     return new StringArrayValidator(this.message, this.taskList);
+  }
+
+  trim() {
+    this.taskList.push(new Task(trim));
+
+    return this;
   }
 }
