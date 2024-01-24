@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Stageus-Corp/validator#readme",
   "devDependencies": {
     "@types/node": "^20.11.5",
+    "tsc-watch": "^6.0.4",
     "typescript": "^5.3.3"
   }
 }
