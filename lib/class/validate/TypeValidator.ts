@@ -4,7 +4,6 @@ import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
 import { optional } from '../../method/validate/optional';
 import { Task } from '../Task';
-import { TaskResult } from '../TaskResult';
 import { ArrayValidator } from './ArrayValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringValidator } from './StringValidator';
