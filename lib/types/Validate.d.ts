@@ -95,4 +95,14 @@ export namespace Validate {
           max?: number;
         };
   }
+
+  export namespace Boolean {
+    export interface IsBooleanOption {
+      /**
+       * Strict about the type of value input
+       * @default false
+       */
+      strict?: boolean;
+    }
+  }
 }

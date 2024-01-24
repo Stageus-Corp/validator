@@ -1,11 +1,14 @@
 import { setDefault } from '../../method/validate/default';
 import { isArray } from '../../method/validate/isArray';
+import { isBoolean } from '../../method/validate/isBoolean';
 import { isEmpty } from '../../method/validate/isEmpty';
 import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
 import { optional } from '../../method/validate/optional';
+import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { ArrayValidator } from './ArrayValidator';
+import { BooleanValidator } from './BooleanValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringValidator } from './StringValidator';
 import { Validator } from './Validator';
@@ -58,6 +61,15 @@ export class TypeValidator extends Validator {
     this.taskList.push(new Task(isString));
 
     return new StringValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to determine if the value is of a boolean type or 'true' or 'false'
+   */
+  public isBoolean(option: Validate.Boolean.IsBooleanOption) {
+    this.taskList.push(new Task(isBoolean, option));
+
+    return new BooleanValidator(this.message, this.taskList);
   }
 
   /**
