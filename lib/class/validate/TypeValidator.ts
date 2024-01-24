@@ -2,6 +2,7 @@ import { setDefault } from '../../method/validate/default';
 import { isArray } from '../../method/validate/isArray';
 import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
+import { optional } from '../../method/validate/optional';
 import { Task } from '../Task';
 import { TaskResult } from '../TaskResult';
 import { ArrayValidator } from './ArrayValidator';
@@ -18,15 +19,7 @@ export class TypeValidator extends Validator {
    * Method to allow entered values to be null or undeﬁned
    */
   public optional() {
-    this.taskList.push(
-      new Task((value) => {
-        if (value === undefined || value === null) {
-          return new TaskResult(true, value, null, true);
-        }
-
-        return new TaskResult(true, value, null);
-      })
-    );
+    this.taskList.push(new Task(optional));
 
     return this;
   }
