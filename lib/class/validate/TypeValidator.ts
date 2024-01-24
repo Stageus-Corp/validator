@@ -66,7 +66,7 @@ export class TypeValidator extends Validator {
   /**
    * Method to determine if the value is of a boolean type or 'true' or 'false'
    */
-  public isBoolean(option: Validate.Boolean.IsBooleanOption) {
+  public isBoolean(option?: Validate.Boolean.IsBooleanOption) {
     this.taskList.push(new Task(isBoolean, option));
 
     return new BooleanValidator(this.message, this.taskList);
