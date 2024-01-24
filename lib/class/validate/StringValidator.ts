@@ -1,6 +1,7 @@
 import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
 import { isEmail } from '../../method/validate/string/isEmail';
+import { isEndWith } from '../../method/validate/string/isEndWith';
 import { isHangeul } from '../../method/validate/string/isHangeul';
 import { isJwt } from '../../method/validate/string/isJwt';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
@@ -90,6 +91,15 @@ export class StringValidator extends Validator {
    */
   isJwt() {
     this.taskList.push(new Task(isJwt));
+
+    return this;
+  }
+
+  /**
+   * Method to determine if it is a string ending with value
+   */
+  isEndWith(endStr: string) {
+    this.taskList.push(new Task(isEndWith, endStr));
 
     return this;
   }
