@@ -8,6 +8,8 @@ import { isPort } from '../../method/validate/number/isPort';
 import { toInt } from '../../method/transform/string/toInt';
 import { toString } from '../../method/transform/number/toString';
 import { StringValidator } from './StringValidator';
+import { toBoolean } from '../../method/transform/number/toBoolean';
+import { BooleanValidator } from './BooleanValidator';
 
 export class NumberValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -75,5 +77,14 @@ export class NumberValidator extends Validator {
     this.taskList.push(new Task(toString));
 
     return new StringValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to transform value to boolena type
+   */
+  toBoolean() {
+    this.taskList.push(new Task(toBoolean));
+
+    return new BooleanValidator(this.message, this.taskList);
   }
 }
