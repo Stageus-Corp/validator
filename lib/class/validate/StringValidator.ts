@@ -160,18 +160,27 @@ export class StringValidator extends Validator {
     return new StringArrayValidator(this.message, this.taskList);
   }
 
+  /**
+   * Method to claer spaces at both ends of value
+   */
   trim() {
     this.taskList.push(new Task(trim));
 
     return this;
   }
 
+  /**
+   * Method to clear spcaes at the right end
+   */
   rTrim() {
     this.taskList.push(new Task(rTrim));
 
     return this;
   }
 
+  /**
+   * Method to clear spcaes at the left end
+   */
   lTrim() {
     this.taskList.push(new Task(lTrim));
 
