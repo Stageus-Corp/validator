@@ -1,3 +1,4 @@
+import { toNumber } from '../../method/transform/toNumber';
 import { include } from '../../method/validate/string/include';
 import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
@@ -12,6 +13,7 @@ import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
 import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
+import { NumberValidator } from './NumberValidator';
 import { Validator } from './Validator';
 
 export class StringValidator extends Validator {
@@ -122,5 +124,14 @@ export class StringValidator extends Validator {
     this.taskList.push(new Task(include, includeStr));
 
     return this;
+  }
+
+  /**
+   * Method to transform value to a number
+   */
+  toNumber() {
+    this.taskList.push(new Task(toNumber));
+
+    return new NumberValidator(this.message, this.taskList);
   }
 }
