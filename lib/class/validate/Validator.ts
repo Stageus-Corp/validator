@@ -7,6 +7,9 @@ export class Validator {
     protected taskList: Task[] = []
   ) {}
 
+  /**
+   * Method to evaluate the validity of a value by running method chaining
+   */
   public run(originalData: any) {
     const taskList = this.taskList;
     let data = originalData;
