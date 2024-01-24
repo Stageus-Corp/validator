@@ -1,3 +1,4 @@
+import { setDefault } from '../../method/validate/default';
 import { isArray } from '../../method/validate/isArray';
 import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
@@ -26,6 +27,15 @@ export class TypeValidator extends Validator {
         return new TaskResult(true, value, null);
       })
     );
+
+    return this;
+  }
+
+  /**
+   * Method that add default value
+   */
+  public default(defaultValue: any) {
+    this.taskList.push(new Task(setDefault, defaultValue));
 
     return this;
   }
