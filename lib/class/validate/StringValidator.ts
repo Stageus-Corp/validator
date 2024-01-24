@@ -1,3 +1,4 @@
+import { toInt } from '../../method/transform/toInt';
 import { toNumber } from '../../method/transform/toNumber';
 import { include } from '../../method/validate/string/include';
 import { isDate } from '../../method/validate/string/isDate';
@@ -131,6 +132,15 @@ export class StringValidator extends Validator {
    */
   toNumber() {
     this.taskList.push(new Task(toNumber));
+
+    return new NumberValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to transform value to a integer
+   */
+  toInt() {
+    this.taskList.push(new Task(toInt));
 
     return new NumberValidator(this.message, this.taskList);
   }

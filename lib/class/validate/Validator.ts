@@ -25,11 +25,11 @@ export class Validator {
 
       // force exit
       if (result.forceExit) {
-        return new RunResult(result.validState, this.message, value, original);
+        return new RunResult(result.valid, this.message, value, original);
       }
 
       // Success
-      if (result.validState) {
+      if (result.valid) {
         continue;
       }
 
