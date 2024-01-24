@@ -1,3 +1,4 @@
+import { include } from '../../method/validate/string/include';
 import { isDate } from '../../method/validate/string/isDate';
 import { isDateTime } from '../../method/validate/string/isDateTime';
 import { isEmail } from '../../method/validate/string/isEmail';
@@ -110,6 +111,15 @@ export class StringValidator extends Validator {
    */
   isStartWith(startStr: string) {
     this.taskList.push(new Task(isStartWith, startStr));
+
+    return this;
+  }
+
+  /**
+   * Method to determin if value contains a string
+   */
+  include(includeStr: string) {
+    this.taskList.push(new Task(include, includeStr));
 
     return this;
   }
