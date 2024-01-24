@@ -1,5 +1,5 @@
 import { TaskResult } from '../../../class/TaskResult';
-import { ValidateMethod } from '../../../types/ValidateMethod';
+import { ValidateMethod } from '../../../../types/ValidateMethod';
 import { toNumber } from './toNumber';
 
 export const toInt: ValidateMethod<string> = (value) => {

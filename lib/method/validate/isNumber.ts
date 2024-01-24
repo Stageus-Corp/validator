@@ -1,6 +1,6 @@
-import { ValidateMethod } from '../../types/ValidateMethod';
+import { ValidateMethod } from '../../../types/ValidateMethod';
 import { TaskResult } from '../../class/TaskResult';
-import { Validate } from '../../types/Validate';
+import { Validate } from '../../../types/Validate';
 import { toNumber } from '../transform/string/toNumber';
 
 export const isNumber: ValidateMethod<any> = (

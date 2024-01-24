@@ -1,5 +1,5 @@
 import { TaskResult } from '../../../class/TaskResult';
-import { ValidateMethod } from '../../../types/ValidateMethod';
+import { ValidateMethod } from '../../../../types/ValidateMethod';
 
 export const isAllNotNull: ValidateMethod<any[]> = (value) => {
   for (const i in value) {

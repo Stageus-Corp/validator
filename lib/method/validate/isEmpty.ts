@@ -1,5 +1,5 @@
 import { TaskResult } from '../../class/TaskResult';
-import { ValidateMethod } from '../../types/ValidateMethod';
+import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const isEmpty: ValidateMethod<any> = (value) => {
   const condition = value === null || value === undefined;

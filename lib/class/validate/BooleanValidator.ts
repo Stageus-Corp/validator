@@ -1,4 +1,4 @@
-import { Validate } from '../../types/Validate';
+import { Validate } from '../../../types/Validate';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 

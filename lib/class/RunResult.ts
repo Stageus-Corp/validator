@@ -1,4 +1,4 @@
-import { Validate } from '../types/Validate';
+import { Validate } from '../../types/Validate';
 
 export class RunResult {
   constructor(

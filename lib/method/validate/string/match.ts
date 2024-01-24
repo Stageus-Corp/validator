@@ -1,5 +1,5 @@
 import { TaskResult } from '../../../class/TaskResult';
-import { ValidateMethod } from '../../../types/ValidateMethod';
+import { ValidateMethod } from '../../../../types/ValidateMethod';
 
 export const match: ValidateMethod<string> = (value, regExp: RegExp) => {
   const condition = regExp.test(value);

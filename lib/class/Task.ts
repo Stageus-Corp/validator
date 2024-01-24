@@ -1,4 +1,4 @@
-import { ValidateMethod } from '../types/ValidateMethod';
+import { ValidateMethod } from '../../types/ValidateMethod';
 
 export class Task {
   public argument: any[] = [];

@@ -5,7 +5,7 @@ import { isEmpty } from '../../method/validate/isEmpty';
 import { isNumber } from '../../method/validate/isNumber';
 import { isString } from '../../method/validate/isString';
 import { optional } from '../../method/validate/optional';
-import { Validate } from '../../types/Validate';
+import { Validate } from '../../../types/Validate';
 import { Task } from '../Task';
 import { ArrayValidator } from './ArrayValidator';
 import { BooleanValidator } from './BooleanValidator';

@@ -1,5 +1,5 @@
 import { TaskResult } from '../../../class/TaskResult';
-import { ValidateMethod } from '../../../types/ValidateMethod';
+import { ValidateMethod } from '../../../../types/ValidateMethod';
 
 export const isJwt: ValidateMethod<string> = (value) => {
   const [header, payload, signature] = value.split('.');
