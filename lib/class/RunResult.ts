@@ -9,6 +9,6 @@ export class RunResult {
   ) {}
 
   public async callback(func: Validate.Callback) {
-    await func(this.valid, this.value, this.original);
+    return await func(this.valid, this.value, this.original, this.message);
   }
 }

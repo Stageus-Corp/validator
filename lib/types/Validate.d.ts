@@ -1,5 +1,10 @@
 export namespace Validate {
-  export type Callback = (valid?: boolean, value?: any, original?: any) => void;
+  export type Callback = (
+    valid?: boolean,
+    message?: string,
+    value?: any,
+    original?: any
+  ) => any;
 
   export namespace String {
     export type LengthOption =
