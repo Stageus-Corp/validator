@@ -9,7 +9,7 @@ export const isNumber: ValidateMethod<any> = (
 ) => {
   const strict = option?.strict || false;
 
-  if (!strict) {
+  if (!strict && typeof value !== 'number') {
     if (typeof value !== 'string') {
       return new TaskResult(false, value, 'Value is not a number');
     }

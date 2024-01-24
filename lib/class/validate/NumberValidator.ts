@@ -6,6 +6,8 @@ import { isNotIn } from '../../method/validate/number/isNotIn';
 import { isInt } from '../../method/validate/number/isInt';
 import { isPort } from '../../method/validate/number/isPort';
 import { toInt } from '../../method/transform/string/toInt';
+import { toString } from '../../method/transform/number/toString';
+import { StringValidator } from './StringValidator';
 
 export class NumberValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -64,5 +66,14 @@ export class NumberValidator extends Validator {
     this.taskList.push(new Task(toInt));
 
     return this;
+  }
+
+  /**
+   * Method to transform value to string type
+   */
+  toString() {
+    this.taskList.push(new Task(toString));
+
+    return new StringValidator(this.message, this.taskList);
   }
 }
