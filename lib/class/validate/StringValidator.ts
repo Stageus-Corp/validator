@@ -3,8 +3,10 @@ import { isDateTime } from '../../method/validate/string/isDateTime';
 import { isEmail } from '../../method/validate/string/isEmail';
 import { isHangeul } from '../../method/validate/string/isHangeul';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
+import { isPw } from '../../method/validate/string/isPw';
 import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
+import { Validate } from '../../types/Validate';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 
@@ -60,6 +62,12 @@ export class StringValidator extends Validator {
 
   isDateTime() {
     this.taskList.push(new Task(isDateTime));
+
+    return this;
+  }
+
+  isPw(option?: Validate.IsPwOption) {
+    this.taskList.push(new Task(isPw, option));
 
     return this;
   }
