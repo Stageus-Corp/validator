@@ -5,6 +5,7 @@ import { isIn } from '../../method/validate/number/isIn';
 import { isNotIn } from '../../method/validate/number/isNotIn';
 import { isInt } from '../../method/validate/number/isInt';
 import { isPort } from '../../method/validate/number/isPort';
+import { toInt } from '../../method/transform/string/toInt';
 
 export class NumberValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -52,6 +53,15 @@ export class NumberValidator extends Validator {
    */
   isPort() {
     this.taskList.push(new Task(isPort));
+
+    return this;
+  }
+
+  /**
+   * Method to transform value to integer
+   */
+  toInt() {
+    this.taskList.push(new Task(toInt));
 
     return this;
   }
