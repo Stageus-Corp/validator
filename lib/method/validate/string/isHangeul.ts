@@ -4,7 +4,7 @@ import { ValidateMethod } from '../../../types/ValidateMethod';
 
 export const isHangeul: ValidateMethod = (
   data: string,
-  option: Validate.String.isHanguelOption
+  option: Validate.String.IsHanguelOption
 ) => {
   const hanguelRegExp = new RegExp(
     option.complete

@@ -25,7 +25,7 @@ export class StringValidator extends Validator {
    * A method of evaluating whether or not it is in hanguel
    * @param option default value of complete is false, default value of space is false
    */
-  isHanguel(option: Validate.String.isHanguelOption) {
+  isHanguel(option: Validate.String.IsHanguelOption) {
     this.taskList.push(new Task(isHangeul, option));
 
     return this;

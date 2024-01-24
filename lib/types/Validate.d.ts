@@ -6,7 +6,7 @@ export namespace Validate {
   ) => void;
 
   export namespace String {
-    export interface isHanguelOption {
+    export interface IsHanguelOption {
       /**
        * Determines whether Value is a complete hanguel
        * @default false
