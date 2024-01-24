@@ -1,4 +1,5 @@
 import { isDate } from '../../method/validate/string/isDate';
+import { isDateTime } from '../../method/validate/string/isDateTime';
 import { isEmail } from '../../method/validate/string/isEmail';
 import { isHangeul } from '../../method/validate/string/isHangeul';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
@@ -53,6 +54,12 @@ export class StringValidator extends Validator {
 
   isDate() {
     this.taskList.push(new Task(isDate));
+
+    return this;
+  }
+
+  isDateTime() {
+    this.taskList.push(new Task(isDateTime));
 
     return this;
   }
