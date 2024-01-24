@@ -4,11 +4,11 @@ export class RunResult {
   constructor(
     public valid: boolean,
     public message: null | string,
-    public data: any,
-    public originalData: any
+    public value: any,
+    public original: any
   ) {}
 
   public async callback(func: Validate.Callback) {
-    await func(this.valid, this.data, this.originalData);
+    await func(this.valid, this.value, this.original);
   }
 }

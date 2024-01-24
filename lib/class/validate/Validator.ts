@@ -10,27 +10,22 @@ export class Validator {
   /**
    * Method to evaluate the validity of a value by running method chaining
    */
-  public run(originalData: any) {
+  public run(original: any) {
     const taskList = this.taskList;
-    let data = originalData;
+    let value = original;
 
     for (const task of taskList) {
-      const result = task.method(data, ...task.argument);
+      const result = task.method(value, ...task.argument);
 
       // set message when default message is null
       if (result.message && !this.message) {
         this.message = result.message;
       }
-      data = result.data;
+      value = result.value;
 
       // force exit
       if (result.forceExit) {
-        return new RunResult(
-          result.validState,
-          this.message,
-          data,
-          originalData
-        );
+        return new RunResult(result.validState, this.message, value, original);
       }
 
       // Success
@@ -39,9 +34,9 @@ export class Validator {
       }
 
       // Fail
-      return new RunResult(false, this.message, data, originalData);
+      return new RunResult(false, this.message, value, original);
     }
 
-    return new RunResult(true, null, data, originalData);
+    return new RunResult(true, null, value, original);
   }
 }

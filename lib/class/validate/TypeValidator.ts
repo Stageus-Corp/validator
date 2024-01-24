@@ -18,12 +18,12 @@ export class TypeValidator extends Validator {
    */
   public optional() {
     this.taskList.push(
-      new Task((data) => {
-        if (data === undefined || data === null) {
-          return new TaskResult(true, data, null, true);
+      new Task((value) => {
+        if (value === undefined || value === null) {
+          return new TaskResult(true, value, null, true);
         }
 
-        return new TaskResult(true, data, null);
+        return new TaskResult(true, value, null);
       })
     );
 
