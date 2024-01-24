@@ -1,3 +1,4 @@
+import { rTrim } from '../../method/transform/string/rTrim';
 import { split } from '../../method/transform/string/split';
 import { toInt } from '../../method/transform/string/toInt';
 import { toNumber } from '../../method/transform/string/toNumber';
@@ -160,6 +161,12 @@ export class StringValidator extends Validator {
 
   trim() {
     this.taskList.push(new Task(trim));
+
+    return this;
+  }
+
+  rTrim() {
+    this.taskList.push(new Task(rTrim));
 
     return this;
   }
