@@ -9,6 +9,7 @@ import { include } from '../../method/validate/string/include';
 import { Validate } from '../../../types/Validate';
 import { length } from '../../method/validate/string/length';
 import { isStartWith } from '../../method/validate/string/isStartWith';
+import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -90,6 +91,14 @@ export class StringArrayValidator extends Validator {
         `does not start with "${startStr}"`,
         startStr
       )
+    );
+
+    return this;
+  }
+
+  isAllOnlyAlphabet() {
+    this.taskList.push(
+      this.taskGenerator(isOnlyAlphabet, `is not only alphabet`)
     );
 
     return this;
