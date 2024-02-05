@@ -54,7 +54,7 @@ export class StringArrayValidator extends Validator {
     return this;
   }
 
-  isAllInclude(includeStr: string) {
+  allInclude(includeStr: string) {
     this.taskList.push(
       this.taskGenerator(
         include,
