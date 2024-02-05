@@ -1,4 +1,4 @@
-# @stagues/validator
+# 🚀 @stagues/validator
 
 You can use @stageus/validator to validate different types of data.
 
@@ -14,7 +14,7 @@ npm install @stageus/validator
 
 <br/>
 
-# Usage
+# ✏️ Usage
 
 This library provides validation for Type as well as Boolean, Date, Number, String, Array, NumberArray, and StringArray types.
 
@@ -39,7 +39,7 @@ result.value; // abc123
 
 <br/>
 
-# Document
+# 📄 Document
 
 ### Function
 
@@ -49,7 +49,7 @@ You can use the "Type" validation method through the function named 'message'. T
 message(). // then you can use Type method
 ```
 
-### Type Method
+### 🔧 Type Method
 
 | Method Name      | Return  | Description                                                                                                                                                                           |
 | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,7 +62,7 @@ message(). // then you can use Type method
 | isDate()         | Date    | It checks whether the input value can be converted to a Date object. If the input value is a string, it should basically follow the ISO8061 format.                                   |
 | isEmpty()        |         | It checks if it is empty. Since this method only checks whether it is empty, you cannot use more validation method chaining.                                                          |
 
-### Number Method
+### 🔧 Number Method
 
 | Method Name         | Return  | Description                                                                                                                                                                                                |
 | ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,7 +75,7 @@ message(). // then you can use Type method
 | toString()          | String  | The value is changed to a string type, and now you can use the String method.                                                                                                                              |
 | toBoolean()         | Boolean | The value is changed to a Boolean type, and now you can use the Boolean method.                                                                                                                            |
 
-### String Method
+### 🔧 String Method
 
 | Method Name           | Return       | Description                                                                                                                                                                                                                                                                                                                                                       |
 | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -101,14 +101,14 @@ message(). // then you can use Type method
 | rTrim()               | String       | This is a method that removes the whitespace from the left end of the string.                                                                                                                                                                                                                                                                                     |
 | lTrim()               | String       | This is a method that removes the whitespace from the right end of the string.                                                                                                                                                                                                                                                                                    |
 
-### Date Method
+### 🔧 Date Method
 
 | Method Name    | Return | Description                                                                                        |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------- |
 | isBefore(date) | Date   | This is a method that checks if the date is earlier than the date received as the first parameter. |
 | isAfter(date)  | Date   | This is a method that checks if the date is later than the date received as the first parameter.   |
 
-### Array Method
+### 🔧 Array Method
 
 | Method Name    | Return       | Description                                                                                                                                                                      |
 | -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -118,7 +118,7 @@ message(). // then you can use Type method
 | isAllString()  | String Array | This is a method that checks if all values in the array are of String Type. Now you can use the String Array method.                                                             |
 | isAllNumber()  | Number Array | This is a method that checks if all values in the array are of Number Type. Now you can use the Number Array method.                                                             |
 
-### Number Array Method
+### 🔧 Number Array Method
 
 | Method Name            | Return       | Description                                                                                                                                                                                    |
 | ---------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -128,7 +128,7 @@ message(). // then you can use Type method
 | isAllPort()            | Number Array | This is a method that checks if all elements of the array can be used as port numbers.                                                                                                         |
 | allRange(option)       | Number Array | This is a method that checks if all elements of the array are within the range. The first parameter must have a min or max property, and by default, it is evaluated as Infinity or -Infinity. |
 
-### String Array Method
+### 🔧 String Array Method
 
 | Method Name              | Return       | Description                                                                                                                                                                                                                                                                                  |
 | ------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -144,13 +144,13 @@ message(). // then you can use Type method
 | isAllEmail()             | String Array | This is a method that checks if all elements of the array are in email format.                                                                                                                                                                                                               |
 | isAllDateTime()          | String Array | This is a method that checks if all elements of the array are in a date format that includes time.                                                                                                                                                                                           |
 
-### Boolean Method
+### 🔧 Boolean Method
 
 There are no methods yet.
 
 <br/>
 
-# Maintainer
+# 😁 Maintainer
 
 <table>
   <tr>
