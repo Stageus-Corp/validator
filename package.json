@@ -1,22 +1,36 @@
 {
   "name": "validator",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "type safe validator",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stageus-Corp/validator.git"
   },
   "keywords": [
-    "validator"
+    "validator",
+    "validation",
+    "validate"
   ],
   "author": "jochongs",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Stageus-Corp/validator/issues"
   },
-  "homepage": "https://github.com/Stageus-Corp/validator#readme"
+  "homepage": "https://github.com/Stageus-Corp/validator#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/validator": "^13.11.8",
+    "release-it": "^17.0.3",
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "validator": "^13.11.0"
+  }
 }
