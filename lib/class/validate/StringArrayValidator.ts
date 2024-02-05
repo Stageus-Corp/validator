@@ -1,10 +1,10 @@
-import { isAllMatch } from '../../method/validate/stringArray/isAllMatch';
 import { Task } from '../Task';
 import { Validator } from './Validator';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 import { TaskResult } from '../TaskResult';
 import { isJwt } from '../../method/validate/string/isJwt';
 import { isJson } from '../../method/validate/string/isJson';
+import { match } from '../../method/validate/string/match';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -34,7 +34,9 @@ export class StringArrayValidator extends Validator {
    * Method to ensure that all elements in value satisfy a reg exp
    */
   isAllMatch(regExp: RegExp) {
-    this.taskList.push(new Task(isAllMatch, regExp));
+    this.taskList.push(
+      this.taskGenerator(match, `is not match on ${regExp}`, regExp)
+    );
 
     return this;
   }
