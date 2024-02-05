@@ -1,6 +1,6 @@
 {
   "name": "@stageus/validator",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "type safe validator",
   "main": "dist/index.js",
   "scripts": {
