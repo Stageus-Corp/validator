@@ -6,6 +6,8 @@ import { isJwt } from '../../method/validate/string/isJwt';
 import { isJson } from '../../method/validate/string/isJson';
 import { match } from '../../method/validate/string/match';
 import { include } from '../../method/validate/string/include';
+import { Validate } from '../../../types/Validate';
+import { length } from '../../method/validate/string/length';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -60,6 +62,20 @@ export class StringArrayValidator extends Validator {
         include,
         `does not contain "${includeStr}"`,
         includeStr
+      )
+    );
+
+    return this;
+  }
+
+  allLength(option: Validate.String.LengthOption) {
+    const min = option.min === undefined ? -Infinity : option.min;
+    const max = option.max === undefined ? +Infinity : option.max;
+    this.taskList.push(
+      this.taskGenerator(
+        length,
+        `length is out of range ( ${min} ~ ${max} )`,
+        option
       )
     );
 
