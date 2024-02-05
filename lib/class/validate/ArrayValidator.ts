@@ -6,6 +6,8 @@ import { Task } from '../Task';
 import { Validator } from './Validator';
 import { isAllString } from '../../method/validate/array/isAllString';
 import { StringArrayValidator } from './StringArrayValidator';
+import { isAllNumber } from '../../method/validate/array/isAllNumber';
+import { NumberArrayValidator } from './NumberArrayValidator';
 
 export class ArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -48,5 +50,14 @@ export class ArrayValidator extends Validator {
     this.taskList.push(new Task(isAllString));
 
     return new StringArrayValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method for check that all elements in an array are number
+   */
+  isAllNumber(option?: Validate.Number.IsNumberOption) {
+    this.taskList.push(new Task(isAllNumber, option));
+
+    return new NumberArrayValidator(this.message, this.taskList);
   }
 }
