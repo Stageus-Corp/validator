@@ -10,6 +10,11 @@ import { Validate } from '../../../types/Validate';
 import { length } from '../../method/validate/string/length';
 import { isStartWith } from '../../method/validate/string/isStartWith';
 import { isOnlyAlphabet } from '../../method/validate/string/isOnlyAlphabet';
+import { isEmail } from '../../method/validate/string/isEmail';
+import { isDate } from '../../method/validate/string/isDate';
+import { isDateTime } from '../../method/validate/string/isDateTime';
+import { isEndWith } from '../../method/validate/string/isEndWith';
+import { isHangeul } from '../../method/validate/string/isHangeul';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -96,9 +101,49 @@ export class StringArrayValidator extends Validator {
     return this;
   }
 
+  isAllEndWith(endStr: string) {
+    this.taskList.push(
+      this.taskGenerator(isEndWith, `does not end with "${endStr}"`, endStr)
+    );
+
+    return this;
+  }
+
+  isAllHangeul(option: Validate.String.IsHanguelOption) {
+    this.taskList.push(
+      this.taskGenerator(
+        isHangeul,
+        `is not ${option.complete ? 'complete' : ''} hanguel`,
+        option
+      )
+    );
+
+    return this;
+  }
+
   isAllOnlyAlphabet() {
     this.taskList.push(
       this.taskGenerator(isOnlyAlphabet, `is not only alphabet`)
+    );
+
+    return this;
+  }
+
+  isAllEmail() {
+    this.taskList.push(this.taskGenerator(isEmail, 'is not email format'));
+
+    return this;
+  }
+
+  isAllDate() {
+    this.taskList.push(this.taskGenerator(isDate, 'is not date format'));
+
+    return this;
+  }
+
+  isAllDateTime() {
+    this.taskList.push(
+      this.taskGenerator(isDateTime, 'is not date time format')
     );
 
     return this;
