@@ -4,15 +4,11 @@ You can use @stageus/validator to validate different types of data.
 
 @stagues/valdiator allows you to transform or validate not only string type but also various types of data.
 
-<br/>
-
 # Installation
 
 ```
 npm install @stageus/validator
 ```
-
-<br/>
 
 # ✏️ Usage
 
@@ -37,8 +33,6 @@ result.message; // Value is not email format
 result.value; // abc123
 ```
 
-<br/>
-
 # 📄 Document
 
 ### Function
@@ -50,6 +44,8 @@ message(). // then you can use Type method
 ```
 
 ### 🔧 Type Method
+
+---
 
 | Method Name      | Return  | Description                                                                                                                                                                           |
 | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -64,6 +60,8 @@ message(). // then you can use Type method
 
 ### 🔧 Number Method
 
+---
+
 | Method Name         | Return  | Description                                                                                                                                                                                                |
 | ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | range(option)       | Number  | It checks whether the input value falls within the range received as a parameter. The first parameter must have a min or max property. If not entered, it is basically evaluated as Infinite or -Infinite. |
@@ -76,6 +74,8 @@ message(). // then you can use Type method
 | toBoolean()         | Boolean | The value is changed to a Boolean type, and now you can use the Boolean method.                                                                                                                            |
 
 ### 🔧 String Method
+
+---
 
 | Method Name           | Return       | Description                                                                                                                                                                                                                                                                                                                                                       |
 | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -103,12 +103,16 @@ message(). // then you can use Type method
 
 ### 🔧 Date Method
 
+---
+
 | Method Name    | Return | Description                                                                                        |
 | -------------- | ------ | -------------------------------------------------------------------------------------------------- |
 | isBefore(date) | Date   | This is a method that checks if the date is earlier than the date received as the first parameter. |
 | isAfter(date)  | Date   | This is a method that checks if the date is later than the date received as the first parameter.   |
 
 ### 🔧 Array Method
+
+---
 
 | Method Name    | Return       | Description                                                                                                                                                                      |
 | -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -120,6 +124,8 @@ message(). // then you can use Type method
 
 ### 🔧 Number Array Method
 
+---
+
 | Method Name            | Return       | Description                                                                                                                                                                                    |
 | ---------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | isAllInt()             | Number Array | This is a method that checks if all elements of the array are of integer type.                                                                                                                 |
@@ -129,6 +135,8 @@ message(). // then you can use Type method
 | allRange(option)       | Number Array | This is a method that checks if all elements of the array are within the range. The first parameter must have a min or max property, and by default, it is evaluated as Infinity or -Infinity. |
 
 ### 🔧 String Array Method
+
+---
 
 | Method Name              | Return       | Description                                                                                                                                                                                                                                                                                  |
 | ------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -145,6 +153,8 @@ message(). // then you can use Type method
 | isAllDateTime()          | String Array | This is a method that checks if all elements of the array are in a date format that includes time.                                                                                                                                                                                           |
 
 ### 🔧 Boolean Method
+
+---
 
 There are no methods yet.
 
