@@ -12,7 +12,9 @@
     "url": "git+https://github.com/Stageus-Corp/validator.git"
   },
   "keywords": [
-    "validator"
+    "validator",
+    "validation",
+    "validate"
   ],
   "author": "jochongs",
   "license": "MIT",
