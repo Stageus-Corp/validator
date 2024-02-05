@@ -8,6 +8,7 @@ import { match } from '../../method/validate/string/match';
 import { include } from '../../method/validate/string/include';
 import { Validate } from '../../../types/Validate';
 import { length } from '../../method/validate/string/length';
+import { isStartWith } from '../../method/validate/string/isStartWith';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -76,6 +77,18 @@ export class StringArrayValidator extends Validator {
         length,
         `length is out of range ( ${min} ~ ${max} )`,
         option
+      )
+    );
+
+    return this;
+  }
+
+  isAllStartWith(startStr: string) {
+    this.taskList.push(
+      this.taskGenerator(
+        isStartWith,
+        `does not start with "${startStr}"`,
+        startStr
       )
     );
 
