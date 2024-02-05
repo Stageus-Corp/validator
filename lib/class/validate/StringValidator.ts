@@ -24,6 +24,8 @@ import { NumberValidator } from './NumberValidator';
 import { StringArrayValidator } from './StringArrayValidator';
 import { Validator } from './Validator';
 import { isJson } from '../../method/validate/string/isJson';
+import { toDate } from '../../method/transform/string/toDate';
+import { DateValidator } from './DateValidator';
 
 export class StringValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -160,6 +162,12 @@ export class StringValidator extends Validator {
     this.taskList.push(new Task(toInt));
 
     return new NumberValidator(this.message, this.taskList);
+  }
+
+  toDate() {
+    this.taskList.push(new Task(toDate));
+
+    return new DateValidator(this.message, this.taskList);
   }
 
   /**
