@@ -7,7 +7,11 @@ export const isStartWith: ValidateMethod<string> = (
 ) => {
   const condition = value.startsWith(startStr);
   if (!condition) {
-    return new TaskResult(false, value, `Value does not start with "${value}"`);
+    return new TaskResult(
+      false,
+      value,
+      `Value does not start with "${startStr}"`
+    );
   }
 
   return new TaskResult(true, value);
