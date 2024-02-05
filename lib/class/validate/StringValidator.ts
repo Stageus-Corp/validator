@@ -19,7 +19,6 @@ import { length } from '../../method/validate/string/length';
 import { match } from '../../method/validate/string/match';
 import { Validate } from '../../../types/Validate';
 import { Task } from '../Task';
-import { ArrayValidator } from './ArrayValidator';
 import { BooleanValidator } from './BooleanValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringArrayValidator } from './StringArrayValidator';
