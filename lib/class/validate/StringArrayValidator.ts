@@ -5,6 +5,7 @@ import { TaskResult } from '../TaskResult';
 import { isJwt } from '../../method/validate/string/isJwt';
 import { isJson } from '../../method/validate/string/isJson';
 import { match } from '../../method/validate/string/match';
+import { include } from '../../method/validate/string/include';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -49,6 +50,18 @@ export class StringArrayValidator extends Validator {
 
   isAllJson() {
     this.taskList.push(this.taskGenerator(isJson, 'is not json'));
+
+    return this;
+  }
+
+  isAllInclude(includeStr: string) {
+    this.taskList.push(
+      this.taskGenerator(
+        include,
+        `does not contain "${includeStr}"`,
+        includeStr
+      )
+    );
 
     return this;
   }
