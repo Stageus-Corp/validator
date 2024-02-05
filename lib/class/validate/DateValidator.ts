@@ -1,3 +1,4 @@
+import { isAfter } from '../../method/validate/date/isAfter';
 import { isBefore } from '../../method/validate/date/isBefore';
 import { Task } from '../Task';
 import { Validator } from './Validator';
@@ -9,6 +10,12 @@ export class DateValidator extends Validator {
 
   isBefore(date: Date) {
     this.taskList.push(new Task(isBefore, date));
+
+    return this;
+  }
+
+  isAfter(date: Date) {
+    this.taskList.push(new Task(isAfter, date));
 
     return this;
   }
