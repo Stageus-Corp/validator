@@ -4,6 +4,8 @@ import { length } from '../../method/validate/array/length';
 import { Validate } from '../../../types/Validate';
 import { Task } from '../Task';
 import { Validator } from './Validator';
+import { isAllString } from '../../method/validate/array/isAllString';
+import { StringArrayValidator } from './StringArrayValidator';
 
 export class ArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -37,5 +39,14 @@ export class ArrayValidator extends Validator {
     this.taskList.push(new Task(isAllIf, func));
 
     return this;
+  }
+
+  /**
+   * Method for check that all elements in an array are string
+   */
+  isAllString() {
+    this.taskList.push(new Task(isAllString));
+
+    return new StringArrayValidator(this.message, this.taskList);
   }
 }
