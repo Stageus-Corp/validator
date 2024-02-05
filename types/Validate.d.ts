@@ -14,6 +14,31 @@ export namespace Validate {
        */
       strict?: boolean;
     }
+
+    export type RangeOption =
+      | {
+          /**
+           * Minimum value
+           * @default -Infinity
+           */
+          min?: number;
+
+          /**
+           * Maximum value
+           */
+          max: number;
+        }
+      | {
+          /**
+           * Minimum value
+           */
+          min: number;
+          /**
+           * Maximum value
+           * * @default +Infinity
+           */
+          max?: number;
+        };
   }
 
   export namespace String {
