@@ -12,6 +12,8 @@ import { BooleanValidator } from './BooleanValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringValidator } from './StringValidator';
 import { Validator } from './Validator';
+import { isDate } from '../../method/validate/isDate';
+import { DateValidator } from './DateValidator';
 
 export class TypeValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -70,6 +72,15 @@ export class TypeValidator extends Validator {
     this.taskList.push(new Task(isBoolean, option));
 
     return new BooleanValidator(this.message, this.taskList);
+  }
+
+  /**
+   * Method to determine if the value can be a Date
+   */
+  public isDate() {
+    this.taskList.push(new Task(isDate));
+
+    return new DateValidator(this.message, this.taskList);
   }
 
   /**
