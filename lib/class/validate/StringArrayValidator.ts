@@ -4,6 +4,7 @@ import { Validator } from './Validator';
 import { ValidateMethod } from '../../../types/ValidateMethod';
 import { TaskResult } from '../TaskResult';
 import { isJwt } from '../../method/validate/string/isJwt';
+import { isJson } from '../../method/validate/string/isJson';
 
 export class StringArrayValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -40,6 +41,12 @@ export class StringArrayValidator extends Validator {
 
   isAllJwt() {
     this.taskList.push(this.taskGenerator(isJwt, 'is not jwt'));
+
+    return this;
+  }
+
+  isAllJson() {
+    this.taskList.push(this.taskGenerator(isJson, 'is not json'));
 
     return this;
   }
