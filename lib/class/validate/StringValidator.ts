@@ -24,6 +24,7 @@ import { BooleanValidator } from './BooleanValidator';
 import { NumberValidator } from './NumberValidator';
 import { StringArrayValidator } from './StringArrayValidator';
 import { Validator } from './Validator';
+import { isJson } from '../../method/validate/string/isJson';
 
 export class StringValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -32,6 +33,15 @@ export class StringValidator extends Validator {
 
   isEmail() {
     this.taskList.push(new Task(isEmail));
+
+    return this;
+  }
+
+  /**
+   * A method of evaluating whether is is JSON
+   */
+  isJson() {
+    this.taskList.push(new Task(isJson));
 
     return this;
   }
