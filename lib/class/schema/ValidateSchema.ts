@@ -187,6 +187,10 @@ export class ValidateSchema<T = any> {
       this.falseFunc(validateResult.value, validateResult.reason);
     }
 
+    if (validateResult.valid && this.trueFunc) {
+      this.trueFunc(validateResult.value, validateResult.reason);
+    }
+
     return validateResult;
   }
 
