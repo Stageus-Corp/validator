@@ -23,7 +23,7 @@ export class Validator {
       }
       value = result.value;
 
-      // force exit
+      // for optional method
       if (result.forceExit) {
         return new RunResult(result.valid, this.message, value, original);
       }
