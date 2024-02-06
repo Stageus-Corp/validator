@@ -3,7 +3,10 @@ import { Validator } from '../validate/Validator';
 import { ArraySchema } from './ArraySchema';
 
 export class ValidateSchema {
-  constructor(private readonly validateSchema: any) {}
+  constructor(
+    private readonly validateSchema: any,
+    private readonly message?: string
+  ) {}
 
   private createFullFieldName(
     key?: string,
@@ -37,7 +40,7 @@ export class ValidateSchema {
       if (schema !== value) {
         valid = false;
         reason.push({
-          message: 'Value is not schema value',
+          message: this.message || 'Value is not schema value',
           field: parentField || null,
         });
       }
@@ -54,7 +57,7 @@ export class ValidateSchema {
       if (!Array.isArray(value)) {
         valid = false;
         reason.push({
-          message: 'Value is not array',
+          message: schema.message || 'Value is not array',
           field: parentField || null,
         });
 
@@ -71,7 +74,9 @@ export class ValidateSchema {
       if (!lengthCondition) {
         valid = false;
         reason.push({
-          message: `Length of value is out of range ( ${schema.min} ~ ${schema.max} )`,
+          message:
+            schema.lengthErrorMessage ||
+            `Length of value is out of range ( ${schema.min} ~ ${schema.max} )`,
           field: field || null,
         });
 
@@ -90,10 +95,12 @@ export class ValidateSchema {
           valid = false;
 
           reason.push({
-            message: `Type of ${this.createFullFieldName(
-              (field || 'Array') + `[${i}]`,
-              parentField
-            )} is invalid`,
+            message:
+              this.message ||
+              `Type of ${this.createFullFieldName(
+                (field || 'Array') + `[${i}]`,
+                parentField
+              )} is invalid`,
             field: this.createFullFieldName(
               (field || 'Array') + `[${i}]`,
               parentField
@@ -153,7 +160,7 @@ export class ValidateSchema {
         ) {
           valid = false;
           reason.push({
-            message: 'Value is not schema value',
+            message: this.message || 'Value is not schema value',
             field: parentField || null,
           });
         }
@@ -189,7 +196,7 @@ export class ValidateSchema {
     if (schema !== value) {
       valid = false;
       reason.push({
-        message: 'Value is not schema value',
+        message: this.message || 'Value is not schema value',
         field: parentField || null,
       });
     }
