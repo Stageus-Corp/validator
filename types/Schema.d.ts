@@ -3,4 +3,6 @@ export namespace Schema {
     message: string | null;
     field: string | null;
   }
+
+  export type Callback<T> = (value?: T, reason?: Schema.Reason[]) => any;
 }

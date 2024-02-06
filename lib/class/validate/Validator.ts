@@ -2,6 +2,7 @@ import { RunResult } from '../RunResult';
 import { Task } from '../Task';
 
 export class Validator {
+  private falseFunc: Function | null = null;
   constructor(
     protected message: null | string = null,
     protected taskList: Task[] = []
@@ -34,9 +35,20 @@ export class Validator {
       }
 
       // Fail
+      if (this.falseFunc) {
+        this.falseFunc(this.message, value, original);
+      }
       return new RunResult(false, this.message, value, original);
     }
 
     return new RunResult(true, null, value, original);
+  }
+
+  public false(
+    func: (message?: null | string, value?: any, original?: any) => void
+  ) {
+    this.falseFunc = func;
+
+    return this;
   }
 }

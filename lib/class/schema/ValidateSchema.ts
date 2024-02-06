@@ -1,8 +1,12 @@
 import { Schema } from '../../../types/Schema';
 import { Validator } from '../validate/Validator';
 import { ArraySchema } from './ArraySchema';
+import { SchemaRunResult } from './SchemaRunResult';
 
-export class ValidateSchema {
+export class ValidateSchema<T = any> {
+  private falseFunc: Schema.Callback<T> | null = null;
+  private trueFunc: Schema.Callback<T> | null = null;
+
   constructor(
     private readonly validateSchema: any,
     private readonly message?: string
@@ -33,7 +37,7 @@ export class ValidateSchema {
     reason: Schema.Reason[] = [],
     field?: string,
     parentField?: string | null
-  ): { valid: boolean; value: T; reason: Schema.Reason[] } {
+  ): SchemaRunResult {
     let valid = true;
 
     if (schema === null || schema === undefined) {
@@ -45,11 +49,7 @@ export class ValidateSchema {
         });
       }
 
-      return {
-        valid: valid,
-        value: schema as T,
-        reason,
-      };
+      return new SchemaRunResult(valid, schema as T, reason);
     }
 
     if (schema instanceof ArraySchema) {
@@ -61,11 +61,7 @@ export class ValidateSchema {
           field: parentField || null,
         });
 
-        return {
-          valid: valid,
-          value,
-          reason,
-        };
+        return new SchemaRunResult(valid, value, reason);
       }
 
       // Length check
@@ -80,11 +76,7 @@ export class ValidateSchema {
           field: field || null,
         });
 
-        return {
-          valid,
-          value: value as T,
-          reason,
-        };
+        return new SchemaRunResult(valid, value, reason);
       }
 
       // Validate Check
@@ -122,11 +114,7 @@ export class ValidateSchema {
         }
       }
 
-      return {
-        valid,
-        value: value as T,
-        reason,
-      };
+      return new SchemaRunResult(valid, value, reason);
     }
 
     if (schema instanceof Validator) {
@@ -139,11 +127,7 @@ export class ValidateSchema {
         });
       }
 
-      return {
-        valid: result.valid,
-        value: result.value,
-        reason,
-      };
+      return new SchemaRunResult(result.valid, result.value, reason);
     }
 
     if (!Array.isArray(schema) && typeof schema === 'object') {
@@ -165,11 +149,7 @@ export class ValidateSchema {
           });
         }
 
-        return {
-          valid: valid,
-          value: value,
-          reason,
-        };
+        return new SchemaRunResult(valid, value, reason);
       }
 
       for (const key of keyList) {
@@ -186,11 +166,7 @@ export class ValidateSchema {
         valid = valid && validateResult.valid;
       }
 
-      return {
-        valid: valid,
-        value: schema as T,
-        reason,
-      };
+      return new SchemaRunResult(valid, schema, reason);
     }
 
     if (schema !== value) {
@@ -201,16 +177,28 @@ export class ValidateSchema {
       });
     }
 
-    return {
-      valid: valid,
-      value: schema as T,
-      reason,
-    };
+    return new SchemaRunResult<T>(valid, schema as T, reason);
   }
 
-  public run<T = any>(
-    value: any
-  ): { valid: boolean; value: T; reason: Schema.Reason[] } {
-    return this.validate<T>(this.validateSchema, value);
+  public run<T = any>(value: any): SchemaRunResult {
+    const validateResult = this.validate<T>(this.validateSchema, value);
+
+    if (!validateResult.valid && this.falseFunc) {
+      this.falseFunc(validateResult.value, validateResult.reason);
+    }
+
+    return validateResult;
+  }
+
+  public true(func: Schema.Callback<T>) {
+    this.trueFunc = func;
+
+    return this;
+  }
+
+  public false(func: Schema.Callback<T>) {
+    this.falseFunc = func;
+
+    return this;
   }
 }
