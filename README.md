@@ -1,12 +1,12 @@
 # 🚀 @stageus/validator
 
-You can use @stageus/validator to validate different types of data.
+You can use `@stageus/validator` to validate different types of data.
 
-@stagues/valdiator allows you to transform or validate not only string type but also various types of data.
+`@stagues/valdiator` allows you to transform or validate not only string type but also various types of data.
 
 # Installation
 
-```
+```bash
 npm install @stageus/validator
 ```
 
@@ -32,14 +32,170 @@ result2.message; // Value is not email format
 result2.value; // abc123
 ```
 
-# 📄 Document
-
-### Function
-
-You can use the "Type" validation method through the function named 'message'. The Type validation method can be confirmed through the document below.
+Also you can use like below.
 
 ```typescript
-message(). // then you can use Type method
+const signUpSchema = object({
+  email: message('Invalid Email').isString().isEmail()
+  pw: message('Invalid Pw').isString().isPw(),
+  fileList: array({
+    path: message('Invalid file path').isString().length({ min: 1 }),
+    ext: message('Invalid file ext').isString().isIn(['png', 'jpeg'])
+  })
+});
+const result3 = signUpSchema.run(userInputData);
+```
+
+Don't forget that you have to call `run` method in order to execute the chained method.
+
+# 📄 Document
+
+## 🔧 Utility Function
+
+You can use the `TypeValidator` method through the function named `message`. The Type validation method can be confirmed through the document below.
+
+### message()
+
+You can set an exception message. If it's empty, the default message is output.
+
+```typescript
+message(); // then you can use Type method
+
+message('invalid email').isString().isEmail();
+```
+
+Never forget to call `run` method.
+
+### object()
+
+Another way to validate an object is to define the object's schema as an object function and then call it through the `run` method.
+
+```typescript
+const signUpSchema = object({
+  email: message('invalid email').toString().isEmail(),
+  pw: message('invalid pw').toString().legnth({ min: 6, max: 12 }).isPw(),
+});
+
+const result = signUpSchema.run({ email: 'abc123@xx.xx', pw: '123' });
+result.valid; // false
+result.value; // { email: "abc123@xx.xx", pw: "123"}
+result.reason; // [{ message: "invalid pw", field: "pw" }]
+```
+
+`object` function returns `ValidateSchema` Type.
+
+The table below lists the methods available in `ValidateSchema`.
+
+#### run(data: any)
+
+Execute validate schema with data.
+
+```typescript
+object({}).run(); // SchemaRunResult
+```
+
+#### false(callback: Schema.Callback)
+
+Setup `callback` function. This `callback` function is called only when `run` method returns false.
+
+```typescript
+object({}).false((value, reason) => {
+  // ...Do Something
+});
+```
+
+If you want to make an exception based on the field, we recommend that you do the following.
+
+```typescript
+object({
+  email: message('invalid email')
+    .isString()
+    .isEmail()
+    .false((message, value, originalValue) => {
+      // ...Do something
+    }),
+  pw: message('invalid pw')
+    .isString()
+    .isEmail()
+    .fales((message, vlaue, originalValue) => {
+      // ...Do something
+    }),
+});
+```
+
+#### true(callback: Schema.Callback)
+
+Setup `callback` function. This `callback` function is called only when `run` method returns true.
+
+```typescript
+object({}).true((value, reason) => {
+  // ...Do Something
+});
+```
+
+Of course, you can set it up at the same time.
+
+```typescript
+const signUpSchema = object({})
+  .true((value, reason) => {
+    // ...Do Something
+  })
+  .false((value, reason) => {
+    // ...Do Something
+  });
+```
+
+Never forget to call `run` method.
+
+```typescript
+signUpSchema.run(userInput);
+```
+
+### array(Schema)
+
+Functions to contain validation schema objects as arrays.
+
+Through `array` function, the value of the object array is validated.
+
+```typescript
+array(signUpSchema);
+```
+
+This function does not support the run method.
+
+To validate, the object function must be used.
+
+```typescript
+object(array(signUpSchema)).run(input);
+```
+
+You can also mix and use functions like below.
+
+```typescript
+const signUpSchema = object({
+  email: message('invalid email').isString().isEmail(),
+  pw: message('invalid pw').isString().length({ min: 6, max: 12 }),
+  info: {
+    imgList: array({
+      path: message('invalid path').isString().length({ min: 1 }),
+      ext: message('invalid ext').isString().isIn(['png', 'jpg']),
+    }),
+  },
+});
+```
+
+Then you can call `run` method.
+
+```typescript
+signUpSchema.run(data);
+```
+
+#### length(option)
+
+Also you can use `length` mehtod.
+
+```typescript
+array(signUpSchema).length({ min: 3 });
 ```
 
 ## 🔧 Type Method
