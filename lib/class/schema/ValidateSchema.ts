@@ -36,7 +36,7 @@ export class ValidateSchema {
   ): { valid: boolean; value: T; reason: Schema.Reason[] } {
     let valid = true;
 
-    if (value === null || value === undefined) {
+    if (schema === null || schema === undefined) {
       if (schema !== value) {
         valid = false;
         reason.push({
