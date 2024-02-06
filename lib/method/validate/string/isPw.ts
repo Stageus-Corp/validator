@@ -4,7 +4,7 @@ import { ValidateMethod } from '../../../../types/ValidateMethod';
 
 export const isPw: ValidateMethod<string> = (
   value,
-  option: Validate.String.IsPwOption
+  option?: Validate.String.IsPwOption
 ) => {
   const spaceRegExp = /\s/;
   const spaceCondition = spaceRegExp.test(value);
@@ -23,7 +23,7 @@ export const isPw: ValidateMethod<string> = (
   }
 
   const numberRegExp = /(?=.*\d)/;
-  if (option.number !== false) {
+  if (option?.number !== false) {
     const numberCondition = numberRegExp.test(value);
 
     if (!numberCondition) {
@@ -36,7 +36,7 @@ export const isPw: ValidateMethod<string> = (
   }
 
   const specialSymbolRegExp = /(?=.*[~`!@#$%^&*()\-_=+[\]{};:'",.<>/?])/;
-  if (option.strong) {
+  if (option?.strong) {
     const specialSymbolCondition = specialSymbolRegExp.test(value);
 
     if (!specialSymbolCondition) {
@@ -49,7 +49,7 @@ export const isPw: ValidateMethod<string> = (
   }
 
   const uppercaseRegExp = /(?=.*[a-z])(?=.*[A-Z])/;
-  if (option.uppercase) {
+  if (option?.uppercase) {
     const uppercaseCondition = uppercaseRegExp.test(value);
 
     if (!uppercaseCondition) {
