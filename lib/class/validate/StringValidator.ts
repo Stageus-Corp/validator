@@ -164,6 +164,9 @@ export class StringValidator extends Validator {
     return new NumberValidator(this.message, this.taskList);
   }
 
+  /**
+   * Method to transform value to a Date object
+   */
   toDate() {
     this.taskList.push(new Task(toDate));
 
