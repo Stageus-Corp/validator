@@ -1,4 +1,4 @@
-# 🚀 @stagues/validator
+# 🚀 @stageus/validator
 
 You can use @stageus/validator to validate different types of data.
 
@@ -22,15 +22,14 @@ import { message } from '@stageus/validator';
 const emailValdiator = message().isString().isEmail();
 
 const result = emailValdiator.run('abc123@xx.xx');
-
 result.valid; // true
 result.message; // null
 result.value; // abc123@xx.xx
 
 const result2 = emailValidator.run('abc123');
-result.valid; // false
-result.message; // Value is not email format
-result.value; // abc123
+result2.valid; // false
+result2.message; // Value is not email format
+result2.value; // abc123
 ```
 
 # 📄 Document
