@@ -3,11 +3,11 @@ import { Validator } from '../validate/Validator';
 export class ValidateSchema {
   constructor(private readonly validateSchema: any) {}
 
-  private validate(
+  private validate<T>(
     schema: any,
     value: any,
     reason: string[] = []
-  ): { valid: boolean; value: any; reason: string[] } {
+  ): { valid: boolean; value: T; reason: string[] } {
     let valid = true;
 
     if (schema instanceof Validator) {
@@ -25,7 +25,7 @@ export class ValidateSchema {
       if (!keyList.length) {
         return {
           valid: true,
-          value: {},
+          value: {} as T,
           reason,
         };
       }
@@ -51,7 +51,9 @@ export class ValidateSchema {
     };
   }
 
-  public run(value: any) {
-    return this.validate(this.validateSchema, value);
+  public run<T = any>(
+    value: any
+  ): { valid: boolean; value: T; reason: string[] } {
+    return this.validate<T>(this.validateSchema, value);
   }
 }
