@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "test": "npx jest ./test",
     "release": "release-it"
   },
   "repository": {
