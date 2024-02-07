@@ -1,11 +1,11 @@
-import { Schema } from '../../../types/Schema';
+import { ValidateSchema } from '../../../types/Schema';
 import { Validator } from '../validate/Validator';
 import { ArraySchema } from './ArraySchema';
 import { SchemaRunResult } from './SchemaRunResult';
 
-export class ValidateSchema<T = any> {
-  private falseFunc: Schema.Callback<T> | null = null;
-  private trueFunc: Schema.Callback<T> | null = null;
+export class ObjectSchema<T = any> {
+  private falseFunc: ValidateSchema.Callback<T> | null = null;
+  private trueFunc: ValidateSchema.Callback<T> | null = null;
 
   constructor(
     private readonly validateSchema: any,
@@ -34,7 +34,7 @@ export class ValidateSchema<T = any> {
   private validate<T>(
     schema: { [key: string]: any },
     value: any,
-    reason: Schema.Reason[] = [],
+    reason: ValidateSchema.Reason[] = [],
     field?: string,
     parentField?: string | null
   ): SchemaRunResult {
@@ -57,7 +57,7 @@ export class ValidateSchema<T = any> {
       if (!Array.isArray(value)) {
         valid = false;
         reason.push({
-          message: schema.message || 'Value is not array',
+          message: schema.errorMessage || 'Value is not array',
           field: parentField || null,
         });
 
@@ -194,13 +194,13 @@ export class ValidateSchema<T = any> {
     return validateResult;
   }
 
-  public true(func: Schema.Callback<T>) {
+  public true(func: ValidateSchema.Callback<T>) {
     this.trueFunc = func;
 
     return this;
   }
 
-  public false(func: Schema.Callback<T>) {
+  public false(func: ValidateSchema.Callback<T>) {
     this.falseFunc = func;
 
     return this;

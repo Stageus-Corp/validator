@@ -1,8 +1,8 @@
-import { ValidateSchema } from '../class/schema/ValidateSchema';
+import { ObjectSchema } from '../class/schema/ObjectSchema';
 
 /**
  * Create Validate Schema
  */
 export const object = (validateSchema: any, message?: string) => {
-  return new ValidateSchema(validateSchema, message);
+  return new ObjectSchema(validateSchema, message);
 };
