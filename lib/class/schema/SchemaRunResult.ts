@@ -1,9 +1,9 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
 
-export class SchemaRunResult<T = any> {
+export class SchemaRunResult<T extends boolean> {
   constructor(
-    public valid: boolean,
-    public value: T,
-    public reason: ValidateSchema.Reason[]
+    public valid: T,
+    public value: any,
+    public reason: T extends true ? null : ValidateSchema.Reason[]
   ) {}
 }
