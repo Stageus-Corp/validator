@@ -1,4 +1,4 @@
-import { ValidateSchema } from '../../../types/Schema';
+import { ValidateSchema } from '../../../types/ValidateShema';
 import { Validator } from '../validate/Validator';
 import { ArraySchema } from './ArraySchema';
 import { SchemaRunResult } from './SchemaRunResult';
