@@ -27,6 +27,7 @@
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
+    "@jest/globals": "^29.7.0",
     "@types/node": "^20.11.5",
     "@types/validator": "^13.11.8",
     "babel-jest": "^29.7.0",
