@@ -1,4 +1,5 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
+import { array } from '../../util/array';
 import { Validator } from '../validate/Validator';
 import { ObjectSchema } from './ObjectSchema';
 import { Schema } from './Schema';
@@ -8,7 +9,6 @@ export class ArraySchema extends Schema {
   private min: number = -Infinity;
   private max: number = Infinity;
   private lengthErrorMessage?: string;
-  private arrayName: string = 'Array';
 
   constructor(
     public readonly validateSchema: Validator | ObjectSchema | ArraySchema,
@@ -52,9 +52,10 @@ export class ArraySchema extends Schema {
     this.errorMessage = message;
   }
 
-  public run(value: any, arrayName?: string): SchemaRunResult<boolean> {
-    if (arrayName) this.arrayName = arrayName;
-
+  public run(
+    value: any,
+    arrayName: string = 'Array'
+  ): SchemaRunResult<boolean> {
     if (!Array.isArray(value)) {
       return new SchemaRunResult(false, value, [
         {
@@ -68,7 +69,7 @@ export class ArraySchema extends Schema {
     if (!lengthCondition) {
       return new SchemaRunResult(false, value, [
         {
-          message: this.errorMessage || 'Length of Array is out of range',
+          message: this.lengthErrorMessage || 'Length of Array is out of range',
           field: arrayName || 'Array',
         },
       ]);
@@ -97,14 +98,14 @@ export class ArraySchema extends Schema {
 
       // Array Schema
       if (this.validateSchema instanceof ArraySchema) {
-        const result = this.validateSchema.run(element);
+        const result = this.validateSchema.run(element, `${arrayName}[${i}]`);
 
         if (!result.valid) {
           valid = false;
           const reasonList: ValidateSchema.Reason[] | null =
             result.reason?.map((reason) => ({
               message: reason.message,
-              field: `${arrayName}[${i}].` + reason.field,
+              field: reason.field,
             })) || [];
           reason.push(...reasonList);
           continue;
