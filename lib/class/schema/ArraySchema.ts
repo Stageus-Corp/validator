@@ -5,7 +5,7 @@ export class ArraySchema {
 
   constructor(
     public readonly validateSchema: any,
-    public readonly message?: string
+    public errorMessage?: string
   ) {}
 
   public length(
@@ -22,5 +22,9 @@ export class ArraySchema {
     }
 
     return this;
+  }
+
+  public message(message?: string) {
+    this.errorMessage = message;
   }
 }
