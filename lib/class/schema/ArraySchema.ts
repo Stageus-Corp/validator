@@ -51,6 +51,9 @@ export class ArraySchema extends Schema {
     this.errorMessage = message;
   }
 
+  /**
+   * Excute array valiation
+   */
   public run(
     value: any,
     arrayName: string = 'Array'
