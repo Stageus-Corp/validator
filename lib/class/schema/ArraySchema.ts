@@ -104,7 +104,7 @@ export class ArraySchema extends Schema {
 
         if (!result.valid) {
           valid = false;
-          const reasonList: ValidateSchema.Reason[] | null =
+          const reasonList: ValidateSchema.Reason[] =
             result.reason?.map((reason) => ({
               message: reason.message,
               field: reason.field,
