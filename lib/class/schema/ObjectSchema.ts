@@ -113,6 +113,7 @@ export class ObjectSchema {
     return new SchemaRunResult(valid, value, valid ? null : reason);
   }
 
+  // Excute valdiation of object validate schema
   public run(
     value: unknown,
     objectName: string = 'Object'
