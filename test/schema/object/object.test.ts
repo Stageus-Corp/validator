@@ -69,6 +69,60 @@ describe('object test', () => {
   });
 });
 
+describe('nested object function', () => {
+  test('1 - depth 2 test ( Success )', () => {
+    const objectSchema = object(
+      object({
+        number: message().isNumber(),
+      })
+    );
+
+    const inputValue = { number: 1 };
+    const result = objectSchema.run(inputValue);
+
+    expect(result.valid).toBe(true);
+  });
+
+  test('2 - dpeth 2 test ( Success )', () => {
+    const objectSchema = object({
+      email: message('invalid email').isString().isEmail(),
+      additionalInfo: object({
+        number: message('invalid number').isNumber(),
+      }),
+    });
+
+    const inputValue = {
+      email: 'abc123@xx.xx',
+      additionalInfo: {
+        number: 1,
+      },
+    };
+    const result = objectSchema.run(inputValue);
+
+    expect(result.valid).toBe(true);
+  });
+
+  test('3 - dpeth 2 test ( Fail )', () => {
+    const objectSchema = object({
+      email: message('invalid email').isString().isEmail(),
+      additionalInfo: object({
+        number: message('invalid number').isNumber(),
+      }),
+    });
+
+    const inputValue = {
+      email: 'abc123@xx.xx',
+      additionalInfo: {
+        number: null,
+      },
+    };
+    const result = objectSchema.run(inputValue);
+
+    expect(result.valid).toBe(false);
+    expect(result.reason?.[0].field).toBe('Object.additionalInfo.number');
+  });
+});
+
 describe('null schema test', () => {
   test('1 - null test', () => {
     const schemaObject = null;
