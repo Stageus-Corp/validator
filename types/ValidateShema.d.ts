@@ -3,6 +3,4 @@ export namespace ValidateSchema {
     message: string | null;
     field: string;
   }
-
-  export type Callback<T> = (value?: T, reason?: Reason[]) => any;
 }
