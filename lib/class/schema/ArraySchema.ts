@@ -1,13 +1,33 @@
-export class ArraySchema {
-  public min: number = -Infinity;
-  public max: number = Infinity;
-  public lengthErrorMessage?: string;
+import { ValidateSchema } from '../../../types/ValidateShema';
+import { Validator } from '../validate/Validator';
+import { ObjectSchema } from './ObjectSchema';
+import { Schema } from './Schema';
+import { SchemaRunResult } from './SchemaRunResult';
+
+export class ArraySchema extends Schema {
+  private min: number = -Infinity;
+  private max: number = Infinity;
+  private lengthErrorMessage?: string;
 
   constructor(
-    public readonly validateSchema: any,
-    public readonly message?: string
-  ) {}
+    public readonly validateSchema: Validator | ObjectSchema | ArraySchema,
+    message?: string
+  ) {
+    super(message);
+  }
 
+  private lengthCheck(value: unknown[]): boolean {
+    const condition = value.length >= this.min && value.length <= this.max;
+    if (!condition) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Set array length
+   */
   public length(
     option: { min?: number; max: number } | { min: number; max?: number },
     message?: string
@@ -22,5 +42,99 @@ export class ArraySchema {
     }
 
     return this;
+  }
+
+  /**
+   * Set array validate error message
+   */
+  public message(message?: string) {
+    this.errorMessage = message;
+  }
+
+  /**
+   * Excute array valiation
+   */
+  public run(
+    value: any,
+    arrayName: string = 'Array'
+  ): SchemaRunResult<boolean> {
+    if (!Array.isArray(value)) {
+      return new SchemaRunResult(false, value, [
+        {
+          message: this.errorMessage || 'Value is not array',
+          field: arrayName || 'Array',
+        },
+      ]);
+    }
+
+    const lengthCondition = this.lengthCheck(value);
+    if (!lengthCondition) {
+      return new SchemaRunResult(false, value, [
+        {
+          message: this.lengthErrorMessage || 'Length of Array is out of range',
+          field: arrayName || 'Array',
+        },
+      ]);
+    }
+
+    const reason: ValidateSchema.Reason[] = [];
+    let valid = true;
+    for (const i in value) {
+      const element = value[i];
+
+      // Validator
+      if (this.validateSchema instanceof Validator) {
+        const result = this.validateSchema.run(element);
+
+        if (!result.valid) {
+          valid = false;
+          reason.push({
+            message: result.message,
+            field: arrayName + `[${i}]`,
+          });
+          continue;
+        }
+
+        value[i] = result.value;
+      }
+
+      // Array Schema
+      if (this.validateSchema instanceof ArraySchema) {
+        const result = this.validateSchema.run(element, `${arrayName}[${i}]`);
+
+        if (!result.valid) {
+          valid = false;
+          const reasonList: ValidateSchema.Reason[] =
+            result.reason?.map((reason) => ({
+              message: reason.message,
+              field: reason.field,
+            })) || [];
+          reason.push(...reasonList);
+          continue;
+        }
+
+        value[i] = result.value;
+      }
+
+      // Object Schema
+      if (this.validateSchema instanceof ObjectSchema) {
+        const result = this.validateSchema.run(element);
+
+        if (!result.valid) {
+          valid = false;
+          const reasonList =
+            result.reason?.map((reason) => ({
+              message: reason.message,
+              field: `${arrayName}[${i}].` + reason.field,
+            })) || [];
+          reason.push(...reasonList);
+          continue;
+        }
+
+        value[i] = result.value;
+      }
+    }
+
+    return new SchemaRunResult(valid, value, valid ? null : reason);
   }
 }
