@@ -50,7 +50,7 @@ Don't forget that you have to call `run` method in order to execute the chained 
 
 # 📄 Document
 
-## 🔧 Utility Function
+## 🔧 Utility
 
 You can use the `TypeValidator` method through the function named `message`. The Type validation method can be confirmed through the document below.
 
@@ -66,9 +66,13 @@ message('invalid email').isString().isEmail();
 
 Never forget to call `run` method.
 
+## 🔧 Schema
+
+`ObjectSchema` and `ArraySchema` can be created through the `object` function and `array` function, and the validation schema can be called through the run method to evaluate the value.
+
 ### object()
 
-Another way to validate an object is to define the object's schema as an object function and then call it through the `run` method.
+It is a funciton of creating an `ObjectSchema`.
 
 ```typescript
 const signUpSchema = object({
@@ -82,9 +86,7 @@ result.value; // { email: "abc123@xx.xx", pw: "123"}
 result.reason; // [{ message: "invalid pw", field: "pw" }]
 ```
 
-`object` function returns `ValidateSchema` Type.
-
-The table below lists the methods available in `ValidateSchema`.
+`object` function returns `ObjectSchema`.
 
 #### run(data: any)
 
@@ -94,66 +96,15 @@ Execute validate schema with data.
 object({}).run(); // SchemaRunResult
 ```
 
-#### false(callback: Schema.Callback)
-
-Setup `callback` function. This `callback` function is called only when `run` method returns false.
-
-```typescript
-object({}).false((value, reason) => {
-  // ...Do Something
-});
-```
-
-If you want to make an exception based on the field, we recommend that you do the following.
-
-```typescript
-object({
-  email: message('invalid email')
-    .isString()
-    .isEmail()
-    .false((message, value, originalValue) => {
-      // ...Do something
-    }),
-  pw: message('invalid pw')
-    .isString()
-    .isEmail()
-    .fales((message, vlaue, originalValue) => {
-      // ...Do something
-    }),
-});
-```
-
-#### true(callback: Schema.Callback)
-
-Setup `callback` function. This `callback` function is called only when `run` method returns true.
-
-```typescript
-object({}).true((value, reason) => {
-  // ...Do Something
-});
-```
-
-Of course, you can set it up at the same time.
-
-```typescript
-const signUpSchema = object({})
-  .true((value, reason) => {
-    // ...Do Something
-  })
-  .false((value, reason) => {
-    // ...Do Something
-  });
-```
-
 Never forget to call `run` method.
 
 ```typescript
 signUpSchema.run(userInput);
 ```
 
-### array(Schema)
+### array(any)
 
-Functions to contain validation schema objects as arrays.
+It is a funciton of creating an `ArraySchema`.
 
 Through `array` function, the value of the object array is validated.
 
@@ -166,7 +117,7 @@ This function does not support the run method.
 To validate, the object function must be used.
 
 ```typescript
-object(array(signUpSchema)).run(input);
+array(signUpSchema).run(input);
 ```
 
 You can also mix and use functions like below.
@@ -184,7 +135,7 @@ const signUpSchema = object({
 });
 ```
 
-Then you can call `run` method.
+Then you can call `run` method to limit legnth of the array.
 
 ```typescript
 signUpSchema.run(data);
