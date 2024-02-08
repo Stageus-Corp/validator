@@ -3,4 +3,10 @@ export namespace ValidateSchema {
     message: string | null;
     field: string;
   }
+
+  export type Callback = (
+    valid: ?boolean,
+    reason?: Reason[] | null,
+    value
+  ) => any;
 }
