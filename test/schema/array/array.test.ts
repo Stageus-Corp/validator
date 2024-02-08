@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { array, message } from '../../lib';
+import { array, message } from '../../../lib';
 
 describe('validator test', () => {
   test('1 - validator test ( Success )', () => {
@@ -119,8 +119,6 @@ describe('array test ( Dpeth 2 )', () => {
 
     const result = arraySchema.run(inputValue);
 
-    console.log(result.reason);
-
     expect(result.valid).toBe(false);
   });
 
@@ -179,7 +177,6 @@ describe('array test ( Depth 3 )', () => {
     const inputValue = [[[null]], [1, 2], [[['null']]]];
 
     const result = arraySchema.run(inputValue);
-    console.log(result.reason);
 
     expect(result.valid).toBe(false);
     expect(result.reason?.length).toBe(4);
