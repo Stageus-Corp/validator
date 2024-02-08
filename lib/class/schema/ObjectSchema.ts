@@ -5,10 +5,7 @@ import { ArraySchema } from './ArraySchema';
 import { SchemaRunResult } from './SchemaRunResult';
 
 export class ObjectSchema {
-  constructor(
-    private readonly validateSchema: any,
-    private readonly message?: string
-  ) {}
+  constructor(private readonly validateSchema: any) {}
 
   private validate(
     schema: any,
