@@ -2,10 +2,13 @@ import { ValidateSchema } from '../../../types/ValidateShema';
 import { object } from '../../util/object';
 import { Validator } from '../validate/Validator';
 import { ArraySchema } from './ArraySchema';
+import { Schema } from './Schema';
 import { SchemaRunResult } from './SchemaRunResult';
 
-export class ObjectSchema {
-  constructor(private readonly validateSchema: any) {}
+export class ObjectSchema extends Schema {
+  constructor(private readonly validateSchema: any, message?: string) {
+    super(message);
+  }
 
   private validate(
     schema: any,
