@@ -1,183 +1,122 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
+import { object } from '../../util/object';
+import { Validator } from '../validate/Validator';
+import { ArraySchema } from './ArraySchema';
 import { SchemaRunResult } from './SchemaRunResult';
 
-export class ObjectSchema<T = any> {
+export class ObjectSchema {
   constructor(
     private readonly validateSchema: any,
     private readonly message?: string
   ) {}
 
-  private createFullFieldName(
-    key?: string,
-    parentKey?: string | null
-  ): string | null {
-    if (!key) {
-      return null;
-    }
-
-    if (!key && !parentKey) {
-      return null;
-    }
-
-    if (!parentKey) {
-      return key;
-    }
-
-    return `${parentKey}.${key}`;
-  }
-
-  private validate<T>(
-    schema: { [key: string]: any },
+  private validate(
+    schema: any,
     value: any,
-    reason: ValidateSchema.Reason[] = [],
-    field?: string,
-    parentField?: string | null
+    objectName: string = 'Object'
   ): SchemaRunResult<boolean> {
+    // null exception
+    if (schema === null || schema === undefined) {
+      return new SchemaRunResult(true, schema, null);
+    }
+
+    // schema is not object
+    if (typeof schema !== 'object' || Array.isArray(schema)) {
+      return new SchemaRunResult(true, schema, null);
+    }
+
+    // Validator
+    if (schema instanceof Validator) {
+      const result = schema.run(value);
+
+      if (!result.valid) {
+        return new SchemaRunResult(false, value, [
+          {
+            field: objectName,
+            message: result.message,
+          },
+        ]);
+      }
+
+      return new SchemaRunResult(true, result.value, null);
+    }
+
+    // ArraySchema
+    if (schema instanceof ArraySchema) {
+      const result = schema.run(value, objectName);
+
+      if (!result.valid) {
+        return new SchemaRunResult(
+          false,
+          value,
+          result.reason?.map((reason) => ({
+            field: reason.field,
+            message: reason.message,
+          })) || []
+        );
+      }
+
+      return new SchemaRunResult(true, result.value, null);
+    }
+
+    // ObjectSchema
+    if (schema instanceof ObjectSchema) {
+      const result = object(schema.validateSchema).run(value, objectName);
+
+      if (!result.valid) {
+        return new SchemaRunResult(
+          false,
+          value,
+          result.reason?.map((reason) => ({
+            field: reason.field,
+            message: reason.message,
+          })) || []
+        );
+      }
+
+      return new SchemaRunResult(true, result.value, null);
+    }
+
+    // Object
     let valid = true;
+    const reason: ValidateSchema.Reason[] = [];
+    if (typeof schema === 'object') {
+      const keyList = Object.keys(schema);
 
-    // if (schema === null || schema === undefined) {
-    //   if (schema !== value) {
-    //     valid = false;
-    //     reason.push({
-    //       message: this.message || 'Value is not schema value',
-    //       field: parentField || null,
-    //     });
-    //   }
+      if (!keyList.length) return new SchemaRunResult(true, schema, null);
 
-    //   return new SchemaRunResult(valid, schema as T, reason);
-    // }
+      for (const key of keyList) {
+        const result = this.validate(
+          schema[key],
+          value?.[key],
+          objectName + `.${key}`
+        );
 
-    // if (schema instanceof ArraySchema) {
-    //   // Array Type check
-    //   if (!Array.isArray(value)) {
-    //     valid = false;
-    //     reason.push({
-    //       message: schema.errorMessage || 'Value is not array',
-    //       field: parentField || null,
-    //     });
+        if (!result.valid) {
+          valid = false;
+          reason.push(
+            ...(result.reason?.map((reason) => ({
+              message: reason.message,
+              field: reason.field,
+            })) || [])
+          );
 
-    //     return new SchemaRunResult(valid, value, reason);
-    //   }
+          continue;
+        }
 
-    //   // Length check
-    //   const lengthCondition =
-    //     value.length >= schema.min && value.length <= schema.max;
-    //   if (!lengthCondition) {
-    //     valid = false;
-    //     reason.push({
-    //       message:
-    //         schema.lengthErrorMessage ||
-    //         `Length of value is out of range ( ${schema.min} ~ ${schema.max} )`,
-    //       field: field || null,
-    //     });
+        schema[key] = result.value;
+      }
 
-    //     return new SchemaRunResult(valid, value, reason);
-    //   }
+      if (valid) value = schema;
+    }
 
-    //   // Validate Check
-    //   for (const i in value) {
-    //     const element = value[i];
-
-    //     if (typeof schema.validateSchema !== typeof element) {
-    //       valid = false;
-
-    //       reason.push({
-    //         message:
-    //           this.message ||
-    //           `Type of ${this.createFullFieldName(
-    //             (field || 'Array') + `[${i}]`,
-    //             parentField
-    //           )} is invalid`,
-    //         field: this.createFullFieldName(
-    //           (field || 'Array') + `[${i}]`,
-    //           parentField
-    //         ),
-    //       });
-    //     } else {
-    //       const validateResult = this.validate(
-    //         schema.validateSchema,
-    //         element,
-    //         [],
-    //         (field || 'Array') + `[${i}]`,
-    //         this.createFullFieldName((field || 'Array') + `[${i}]`, parentField)
-    //       );
-
-    //       if (!validateResult.valid) {
-    //         valid = false;
-    //         reason.push(...validateResult.reason);
-    //       }
-    //     }
-    //   }
-
-    //   return new SchemaRunResult(valid, value, reason);
-    // }
-
-    // if (schema instanceof Validator) {
-    //   const result = schema.run(value);
-
-    //   if (!result.valid) {
-    //     reason.push({
-    //       message: result.message,
-    //       field: parentField || null,
-    //     });
-    //   }
-
-    //   return new SchemaRunResult(result.valid, result.value, reason);
-    // }
-
-    // if (!Array.isArray(schema) && typeof schema === 'object') {
-    //   const keyList = Object.keys(schema);
-
-    //   if (!keyList.length) {
-    //     // value is not {}
-    //     if (
-    //       !(
-    //         !Array.isArray(value) &&
-    //         typeof value === 'object' &&
-    //         Object.keys(value).length === 0
-    //       )
-    //     ) {
-    //       valid = false;
-    //       reason.push({
-    //         message: this.message || 'Value is not schema value',
-    //         field: parentField || null,
-    //       });
-    //     }
-
-    //     return new SchemaRunResult(valid, value, reason);
-    //   }
-
-    //   for (const key of keyList) {
-    //     const oneOfSchema = schema[key];
-    //     const validateResult = this.validate(
-    //       oneOfSchema,
-    //       value?.[key],
-    //       reason,
-    //       key,
-    //       this.createFullFieldName(key, parentField)
-    //     );
-
-    //     schema[key] = validateResult.value;
-    //     valid = valid && validateResult.valid;
-    //   }
-
-    //   return new SchemaRunResult(valid, schema, reason);
-    // }
-
-    // if (schema !== value) {
-    //   valid = false;
-    //   reason.push({
-    //     message: this.message || 'Value is not schema value',
-    //     field: parentField || null,
-    //   });
-    // }
-
-    return new SchemaRunResult(valid, schema as T, null);
+    return new SchemaRunResult(valid, value, valid ? null : reason);
   }
 
-  public run<T = any>(value: any): SchemaRunResult<boolean> {
-    const validateResult = this.validate<T>(this.validateSchema, value);
-
-    return validateResult;
+  public run(
+    value: unknown,
+    objectName: string = 'Object'
+  ): SchemaRunResult<boolean> {
+    return this.validate(this.validateSchema, value, objectName);
   }
 }
