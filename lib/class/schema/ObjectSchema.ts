@@ -1,12 +1,7 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
-import { Validator } from '../validate/Validator';
-import { ArraySchema } from './ArraySchema';
 import { SchemaRunResult } from './SchemaRunResult';
 
 export class ObjectSchema<T = any> {
-  private falseFunc: ValidateSchema.Callback<T> | null = null;
-  private trueFunc: ValidateSchema.Callback<T> | null = null;
-
   constructor(
     private readonly validateSchema: any,
     private readonly message?: string
@@ -183,29 +178,6 @@ export class ObjectSchema<T = any> {
   public run<T = any>(value: any): SchemaRunResult<boolean> {
     const validateResult = this.validate<T>(this.validateSchema, value);
 
-    if (!validateResult.valid && this.falseFunc) {
-      // this.falseFunc(
-      //   validateResult.value,
-      //   validateResult.reason as ValidateSchema.Reason
-      // );
-    }
-
-    if (validateResult.valid && this.trueFunc) {
-      this.trueFunc(validateResult.value);
-    }
-
     return validateResult;
-  }
-
-  public true(func: ValidateSchema.Callback<T>) {
-    this.trueFunc = func;
-
-    return this;
-  }
-
-  public false(func: ValidateSchema.Callback<T>) {
-    this.falseFunc = func;
-
-    return this;
   }
 }
