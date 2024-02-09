@@ -33,7 +33,7 @@ export class ObjectSchema extends Schema {
         return new SchemaRunResult(false, value, [
           {
             field: objectName,
-            message: result.message,
+            message: result.message as string,
           },
         ]);
       }
