@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 import { array, message } from '../../../lib';
 
-describe('validator test', () => {
+describe('Validator test', () => {
   test('1 - validator test ( Success )', () => {
     const arraySchema = array(message('invalid value').isNumber());
     const inputValue = ['1', 2];
@@ -40,7 +40,7 @@ describe('validator test', () => {
   });
 });
 
-describe('array non-array test', () => {
+describe('non-array input value test', () => {
   test('1 - non-array value test ( Fail )', () => {
     const testMessage = 'invalid test value message';
     const arraySchema = array(
