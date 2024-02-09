@@ -1,4 +1,5 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
+import { object } from '../../util/object';
 import { Validator } from '../validate/Validator';
 import { ObjectSchema } from './ObjectSchema';
 import { Schema } from './Schema';
@@ -79,6 +80,7 @@ export class ArraySchema extends Schema {
 
     const reason: ValidateSchema.Reason[] = [];
     let valid = true;
+    const returnValue = [];
     for (const i in value) {
       const element = value[i];
 
@@ -95,7 +97,8 @@ export class ArraySchema extends Schema {
           continue;
         }
 
-        value[i] = result.value;
+        returnValue.push(result.value);
+        continue;
       }
 
       // Array Schema
@@ -113,28 +116,34 @@ export class ArraySchema extends Schema {
           continue;
         }
 
-        value[i] = result.value;
+        returnValue.push(result.value);
+        continue;
       }
 
       // Object Schema
       if (this.validateSchema instanceof ObjectSchema) {
-        const result = this.validateSchema.run(element);
+        const result = this.validateSchema.run(element, `${arrayName}[${i}]`);
 
         if (!result.valid) {
           valid = false;
           const reasonList =
             result.reason?.map((reason) => ({
               message: reason.message,
-              field: `${arrayName}[${i}].` + reason.field,
+              field: reason.field,
             })) || [];
           reason.push(...reasonList);
           continue;
         }
 
-        value[i] = result.value;
+        returnValue.push(result.value);
+        continue;
       }
     }
 
-    return new SchemaRunResult(valid, value, valid ? null : reason);
+    return new SchemaRunResult(
+      valid,
+      valid ? returnValue : value,
+      valid ? null : reason
+    );
   }
 }
