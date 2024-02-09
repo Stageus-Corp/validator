@@ -103,6 +103,38 @@ describe('non-array input value test', () => {
   });
 });
 
+describe('any parameter test', () => {
+  test('1 - just number value ( Success )', () => {
+    const arraySchema = array(123);
+    const inputValue = [1, 2, 3];
+
+    const result = arraySchema.run(inputValue);
+
+    expect(result.valid).toBe(true);
+    expect(result.reason).toBe(null);
+  });
+
+  test('3 - null value ( Fail )', () => {
+    const arraySchema = array(null);
+    const inputValue = [1, 2, 3];
+
+    const result = arraySchema.run(inputValue);
+
+    expect(result.valid).toBe(true);
+    expect(result.reason).toBe(null);
+  });
+
+  test('4 - undefined value ( Success )', () => {
+    const arraySchema = array(undefined);
+    const inputValue = [1, 2, 3];
+
+    const result = arraySchema.run(inputValue);
+
+    expect(result.valid).toBe(true);
+    expect(result.reason).toBe(null);
+  });
+});
+
 describe('array test ( Dpeth 2 )', () => {
   test('1 - array value ( Success )', () => {
     const arraySchema = array(array(message('should be number').isNumber()));
