@@ -37,7 +37,7 @@ describe('object schema test', () => {
     expect(typeof result.value.number).toBe('string');
   });
 
-  test('2 - object value ( Fail )', () => {
+  test('3 - object value ( Fail )', () => {
     const arraySchema = array({
       number: message().isNumber(),
     });
@@ -49,7 +49,7 @@ describe('object schema test', () => {
     expect(result.reason?.[0].field).toBe('Array[0].number');
   });
 
-  test('3 - depth2 object value ( Success )', () => {
+  test('4 - depth2 object value ( Success )', () => {
     const arraySchema = array({
       test: {
         numberList: array({
@@ -82,7 +82,7 @@ describe('object schema test', () => {
     expect(result.reason).toBe(null);
   });
 
-  test('4 - depth2 object value ( Fail )', () => {
+  test('5 - depth2 object value ( Fail )', () => {
     const arraySchema = array({
       test: {
         numberList: array({
