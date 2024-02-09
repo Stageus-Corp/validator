@@ -1,5 +1,4 @@
 import { ValidateSchema } from '../../../types/ValidateShema';
-import { object } from '../../util/object';
 import { Validator } from '../validate/Validator';
 import { ObjectSchema } from './ObjectSchema';
 import { Schema } from './Schema';
