@@ -1,12 +1,12 @@
 export namespace ValidateSchema {
   export interface Reason {
-    message: string | null;
+    message: string;
     field: string;
   }
 
   export type Callback = (
-    valid: ?boolean,
+    valid?: boolean,
     reason?: Reason[] | null,
-    value
+    value?: any
   ) => any;
 }

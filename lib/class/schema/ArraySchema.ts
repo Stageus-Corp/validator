@@ -79,7 +79,7 @@ export class ArraySchema extends Schema {
 
     const reason: ValidateSchema.Reason[] = [];
     let valid = true;
-    const returnValue = [];
+    const returnValue: any[] = [];
     for (const i in value) {
       const element = value[i];
 
@@ -90,7 +90,7 @@ export class ArraySchema extends Schema {
         if (!result.valid) {
           valid = false;
           reason.push({
-            message: result.message,
+            message: result.message as string,
             field: arrayName + `[${i}]`,
           });
           continue;
