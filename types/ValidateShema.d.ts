@@ -5,8 +5,8 @@ export namespace ValidateSchema {
   }
 
   export type Callback = (
-    valid: ?boolean,
+    valid?: boolean,
     reason?: Reason[] | null,
-    value
+    value?: any
   ) => any;
 }
