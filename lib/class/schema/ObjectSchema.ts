@@ -85,6 +85,7 @@ export class ObjectSchema extends Schema {
 
       if (!keyList.length) return new SchemaRunResult(true, schema, null);
 
+      const returnValue: any = {};
       for (const key of keyList) {
         const result = this.validate(
           schema[key],
@@ -104,13 +105,17 @@ export class ObjectSchema extends Schema {
           continue;
         }
 
-        schema[key] = result.value;
+        returnValue[key] = result.value;
       }
 
-      if (valid) value = schema;
+      return new SchemaRunResult(
+        valid,
+        valid ? returnValue : value,
+        valid ? null : reason
+      );
     }
 
-    return new SchemaRunResult(valid, value, valid ? null : reason);
+    return new SchemaRunResult(true, value, null);
   }
 
   // Excute valdiation of object validate schema
