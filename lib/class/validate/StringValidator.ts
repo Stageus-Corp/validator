@@ -51,7 +51,7 @@ export class StringValidator extends Validator {
   /**
    * A method of evaluating whether or not it is in hanguel
    */
-  isHanguel(option: Validate.String.IsHanguelOption) {
+  isHanguel(option?: Validate.String.IsHanguelOption) {
     this.taskList.push(new Task(isHangeul, option));
 
     return this;

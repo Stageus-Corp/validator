@@ -4,12 +4,15 @@ import { ValidateMethod } from '../../../../types/ValidateMethod';
 
 export const isHangeul: ValidateMethod<string> = (
   value,
-  option: Validate.String.IsHanguelOption
+  option?: Validate.String.IsHanguelOption
 ) => {
+  let completeOption = option?.complete ? option.complete : true;
+  let spaceOption = option?.space ? option.space : false;
+
   const hanguelRegExp = new RegExp(
-    option.complete
-      ? `^[가-힣${option.space ? '\\s' : ''}]+$`
-      : `^[ㄱ-ㅎㅏ-ㅣ가-힣${option.space ? '\\s' : ''}]*$`
+    completeOption
+      ? `^[가-힣${spaceOption ? '\\s' : ''}]+$`
+      : `^[ㄱ-ㅎㅏ-ㅣ가-힣${spaceOption ? '\\s' : ''}]*$`
   );
 
   const hangeulCondition = hanguelRegExp.test(value);
@@ -17,7 +20,7 @@ export const isHangeul: ValidateMethod<string> = (
     return new TaskResult(
       false,
       value,
-      `Value is not ${option.complete ? 'complete' : ''} hanguel`
+      `Value is not ${completeOption ? 'complete' : ''} hanguel`
     );
   }
 
