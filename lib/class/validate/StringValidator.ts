@@ -26,6 +26,7 @@ import { Validator } from './Validator';
 import { isJson } from '../../method/validate/string/isJson';
 import { toDate } from '../../method/transform/string/toDate';
 import { DateValidator } from './DateValidator';
+import { isIn } from '../../method/validate/string/isIn';
 
 export class StringValidator extends Validator {
   constructor(message: null | string = null, taskList: Task[] = []) {
@@ -138,7 +139,16 @@ export class StringValidator extends Validator {
   }
 
   /**
-   * Method to determin if value contains a string
+   * Method to determine if value include in a string list
+   */
+  isIn(stringList: string[]) {
+    this.taskList.push(new Task(isIn, stringList));
+
+    return this;
+  }
+
+  /**
+   * Method to determine if value contains a string
    */
   include(includeStr: string) {
     this.taskList.push(new Task(include, includeStr));
